@@ -1,0 +1,164 @@
+---
+tags: ['Kentucky', 'R', 'Government']
+date: 2017-04-19T13:14:46-04:00
+title: 'W-Nominate Scores'
+draft: FALSE
+author: 'Robert Kahne'
+---
+```{r setup, include = F}
+knitr::opts_chunk$set(collapse = TRUE)
+library(pscl)
+library(wnominate)
+library(tidyverse)
+library(stringr)
+library(gridExtra)
+
+votes <- read_csv('https://query.data.world/s/8ta9wcevg9crkp319k8knal2c')
+legislators <- read_csv('https://query.data.world/s/6i8gpey8jqq8epjbrg7xkyycn') %>% 
+  mutate(chamber = map_chr(District, function(i) str_sub(i, 1, 1)),
+         party = map_chr(Party, function(i) ifelse(i == 'Democratic', 'D', ifelse(i == 'Republican', 'R', NA)))) 
+
+house <- filter(legislators, chamber == 'H')
+
+house_votes <- votes %>% 
+  filter(legislator_id %in% house$legislator_id) %>% 
+  select(legis.names = MemberName, BillName, Vote) %>% 
+  mutate(Vote = map_dbl(Vote, function(i){
+    case_when(
+      i == 'YEA' ~ 1,
+      i == 'NAY' ~ 6,
+      i == 'NV' ~ 9,
+      i == 'ABS' ~ 9,
+      is.na(i) ~ 9
+    )
+  })) %>% 
+  spread(key = BillName, value = Vote)
+house_votes[is.na(house_votes)] <- 9
+
+house_votes_m <- as.matrix(select(house_votes, -legis.names))
+dimnames(house_votes_m) <- list(house_votes$legis.names, dimnames(house_votes_m)[[2]])
+
+house_rc <- rollcall(
+  data = house_votes_m,
+  yea = 1, nay = 6, missing = 9, notInLegis = 0,
+  vote.names = subset(names(house_votes), names(house_votes) != 'legis.names'),
+  legis.data = legislators %>% filter(chamber == 'H') %>%  select(LastUnique, party, Race, Gender, First.Elected),
+  desc = 'Kentucky General Assembly, 2017',
+  source = 'Derby Pie Politics API'
+)
+
+
+senate <- filter(legislators, chamber == 'S')
+
+senate_votes <- votes %>% 
+  filter(legislator_id %in% senate$legislator_id) %>% 
+  select(legis.names = MemberName, BillName, Vote) %>% 
+  mutate(Vote = map_dbl(Vote, function(i){
+    case_when(
+      i == 'YEA' ~ 1,
+      i == 'NAY' ~ 6,
+      i == 'NV' ~ 9,
+      i == 'ABS' ~ 9,
+      is.na(i) ~ 9
+    )
+  })) %>% 
+  spread(key = BillName, value = Vote)
+senate_votes[is.na(senate_votes)] <- 9
+
+senate_votes_m <- as.matrix(select(senate_votes, -legis.names))
+dimnames(senate_votes_m) <- list(senate_votes$legis.names, dimnames(senate_votes_m)[[2]])
+
+senate_rc <- rollcall(
+  data = senate_votes_m,
+  yea = 1, nay = 6, missing = 9, notInLegis = 0,
+  vote.names = subset(names(senate_votes), names(senate_votes) != 'legis.names'),
+  legis.data = legislators %>% filter(chamber == 'S') %>%  select(LastUnique, party, Race, Gender, First.Elected),
+  desc = 'Kentucky General Assembly, 2017',
+  source = 'Derby Pie Politics API'
+)
+
+house_wn <- wnominate(house_rc, polarity = c(35, 45)) # 35 = Hoover, 45 = Lee
+senate_wn <- wnominate(senate_rc, polarity = c(30, 28)) # 30 = Stivers, 28 = Seum 
+
+```
+A few days ago on [twitter](https://twitter.com/rkahne/status/852909621354385408), I wrote about some work I had done regarding `W-Nominate` scores and the Kentucky Legislature.  I am getting the sense that many people are confused about what exactly `W-Nominate` is and how it works.  So, allow me to try and explain!
+
+## What is `W-Nominate`?
+The technical description of [W-Nominate](http://voteview.com/w-nominate.htm), taken directly from their site, is “a scaling procedure that performs parametric unfolding of binary choice data.”  As input, the model takes as input a set of binary decisions (votes!) and gives as output a continuous variable that identifies where, along a left-right axis, a legislator falls.  Essentially, the model looks at the votes, and tells us how liberal or conservative each legislator is.
+
+The most common question I got about the `W-Nominate` tweets I sent went something like: “How did you weight each vote?”  I expect that many of these questions came from the fact that many of the existing rankings of Kentucky legislators are based on a few votes.  Whoever does the work pulls the votes they are most concerned with, sees who voted which way on those few votes (maybe they apply a weight to a few of the most controversial votes), and then does a quick math problem.
+
+This methodology is easy to understand, but it suffers from significant bias.  This might not be an issue!  The Chamber of Commerce issued a [ranking of legislators](https://issuu.com/kychamber/docs/results_for_business_2017) based on how they voted on bills the chamber supported.  Obviously that’s biased, but for the Chamber, that’s a feature (not a bug).  They are looking for how people voted on *their* issues, and their methodology is based on *their* bills.  If you are looking for an unbiased ranking, though, `W-Nominate` becomes very useful.
+
+The `W-Nominate` methodology is completely agnostic about the text of a bill.  In fact, I didn’t even pass the text or description of the bills to the model at all.  The model see who voted *for*, *against*, and who *passed* on each bill.  The model does throw out all the votes which were very lopsided, throwing out bills that have less than 2.5% opposition.   The model ended up keeping 81 House votes and 73 Senate votes (the Venn diagram of these votes is quite interesting, but that’s for another day).  Since the only input are the votes and the algorithm looks at all the votes, we can be sure that the outputs do not include selection bias.
+
+Actually, there is another input that `W-Nominate` considers. The basis of the project was in looking at different dimensions of polarization in legislatures.  The model was great at parsing out how different coalitions emerged around different issues.  This used to be a much bigger deal in American government -- think about “Southern Democrats” or “Liberal Republicans”.  So, the model takes two legislators, typically of the same party, who are “conservative” on each of the particular dimensions of interest.  If I were doing the 2002 US Senate, I would have picked Zell Miller and Jim Jeffords.  For *this* legislature, I picked Jeff Hoover and Stan Lee in the House, and Robert Stivers and Dan Seum in the Senate.  The idea was “Republican in leadership from a rural area” juxtaposed with “very conservative Republican from an urban area.”  In the end, there was only one dimension of interest, which we will see in a moment.
+
+### A Note on the Data
+This data came from a whole bunch of work done during the Data for Democracy Hackathon.  I joined a bunch of other civically minded data folks to mine the Kentucky Legislative Research Commission website to digitize all the votes that took place during the 2017 legislative session.  I’ve said thank you to all the people who were there several times, but, once again _*THANK YOU*_.
+
+## Output
+Before we get to the actually useful output, let’s take a look at the two dimensional data.  Below is the 2D plot of the legislators (House first, Senate Second):
+
+```{r 2D, echo=FALSE, message=FALSE, warning=FALSE, fig.show = 'hold', fig.align='center'}
+plot.coords(house_wn)
+plot.coords(senate_wn)
+
+```
+You can clearly see that the Republicans and Democrats separate themselves on the left-right dimension, but the second dimension doesn’t seem to show any kind of useful information.  If it did, we would see legislators bunching into one corner or another, or perhaps separate groups separated into specific chunks.  There is a type of plot we can use to gauge the usefulness of each dimension.  A `scree` plot is commonly used in principal component analysis to determine how many factors are useful.  These types of plots typically look like a hockey stick laid on it side: the value to the far left is somewhat large, and the other values are small.  All values that are >1 are typically useful for analysis.  Here are the `scree` plots for this analysis (again, House first, Senate Second):
+```{r Scree, echo=FALSE, message=FALSE, warning=FALSE, fig.show = 'hold', fig.align='center'}
+plot.scree(house_wn)
+plot.scree(senate_wn)
+
+```
+As you can see, only the first dimension has a value in the `scree` plot >1.  So, the Kentucky legislature is arranged on a very linear scale: we can be very confident that legislators have arranged themselves on a left-right scale. Now that we know what we have, let’s look at more useful information.  I’ve arranged the legislature on a left-right scale using the first dimension, using names.  You won’t be able to see many of the names, but if you look closely, you can probably find your favorite (or least favorite) legislator.
+```{r ggplots, echo=FALSE, message=FALSE, warning=FALSE, fig.show = 'hold', fig.align='center'}
+house_wn_df <- house_wn$legislators
+house_gg <- ggplot(house_wn_df, aes(x = coord1D, y = coord1D, color = party)) +
+            geom_text(aes(label = LastUnique, angle = 90)) + 
+            scale_color_manual(values = c('D' = 'blue', 'R' = 'Red')) +
+            theme_minimal() +
+            scale_y_continuous('') +
+            scale_x_continuous('Left-Right, using Stan Lee') +
+            ggtitle('Ranking Ideology of KY House, 2017') +
+            theme(axis.text = element_blank(),
+                  panel.grid = element_blank())
+
+senate_wn_df <- senate_wn$legislators
+senate_gg <-  ggplot(senate_wn_df, aes(x = coord1D, y = coord1D, color = party)) +
+              geom_text(aes(label = LastUnique, angle = 90)) + 
+              scale_color_manual(values = c('D' = 'blue', 'R' = 'Red')) +
+              theme_minimal() +
+              scale_y_continuous('') +
+              scale_x_continuous('Left-Right, using Dan Seum') +
+              ggtitle('Ranking Ideology of KY Senate, 2017') +
+              theme(axis.text = element_blank(),
+                    panel.grid = element_blank())
+
+house_gg
+senate_gg
+
+```
+
+## Analyzing the Data
+Very little of this data is too surprising for people who have watched the Kentucky legislature very closely.  Among Democrats, urban legislators and legislators of color are the most liberal.  Republicans are incredibly bunched.  This is not surprising: since Republicans are the majority in both houses, they set the agenda.  They did not introduce much legislation that was controversial among Republicans, but did introduce lots of legislation that split the Democratic vote (for example, there were two major bills passed in the first week of the legislature which had to do with abortion).
+
+To me, `W-Nominate` scores are most useful for identifying which legislators don’t fit well in their seat.  For Democrats, an “efficient” caucus is one where members are as liberal as their districts will allow.  `W-Nominate` scores can be used to see if a member who lives in a safe district is voting more conservatively than their district.  The reverse is true for Republicans.  
+
+This exercise has shown me that the caucuses in the Kentucky legislature are very well sorted.  No Republican is more liberal than any Democrat and no Democrat is more conservative than any Republican.  The more liberal Republicans tend to be from more liberal districts, and more conservative Democrats are from more conservative districts.  This is in-line with the polarization being experienced in legislatures in state capitols across the country as well as Washington.  There are those who argue that this polarization is a bad thing--that might be true, but it does seem to exist because of a response to incentives.
+
+# Appendices
+
+### House Rankings
+```{r House Rankings, echo=FALSE, message=FALSE, warning=FALSE, fig.show = 'hold', fig.align='center'}
+house_wn_df %>% 
+  select(LastUnique, coord1D) %>% 
+  arrange(coord1D)
+```
+
+### Senate Rankings
+```{r Senate Rankings, echo=FALSE, message=FALSE, warning=FALSE, fig.show = 'hold', fig.align='center'}
+senate_wn_df %>% 
+  select(LastUnique, coord1D) %>% 
+  arrange(coord1D)
+```

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Government on Blog - Robert Kahne</title>
+    <link>/tags/government/</link>
+    <description>Recent content in Government on Blog - Robert Kahne</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Apr 2017 13:14:46 -0400</lastBuildDate>
+    
+	<atom:link href="/tags/government/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>W-Nominate Scores</title>
+      <link>/2017/04/19/w-nominate-scores/</link>
+      <pubDate>Wed, 19 Apr 2017 13:14:46 -0400</pubDate>
+      
+      <guid>/2017/04/19/w-nominate-scores/</guid>
+      <description>A few days ago on twitter, I wrote about some work I had done regarding W-Nominate scores and the Kentucky Legislature. I am getting the sense that many people are confused about what exactly W-Nominate is and how it works. So, allow me to try and explain!
+What is W-Nominate?The technical description of W-Nominate, taken directly from their site, is “a scaling procedure that performs parametric unfolding of binary choice data.</description>
+    </item>
+    
+  </channel>
+</rss>
