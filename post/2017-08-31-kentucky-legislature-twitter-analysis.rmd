@@ -1,9 +1,9 @@
 ---
 tags: ['Kentucky', 'R', 'Government']
-date: 2017-08-31T13:00:00-00:00
+date: 2017-08-31T13:14:46-04:00
 title: "Kentucky Legislature Twitter Analysis"
-author: "Robert Kahne"
 draft: FALSE
+author: "Robert Kahne"
 ---
 
 ```{r setup, include=FALSE}

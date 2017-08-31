@@ -25,17 +25,9 @@
 
 
 
-
-
-  <meta name="twitter:card" content="summary"/>
-
-
-
-<meta name="twitter:text:title" content="EDA and Basic Data Munging with Public Data"/>
-<meta name="twitter:title" content="EDA and Basic Data Munging with Public Data"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="EDA and Basic Data Munging with Public Data"/>
 <meta name="twitter:description" content="What are we about to do?Learn the most important idioms for data munging in RApply them to an open data exampleBy the end, I hope you can use these skills to repeat this process with data you findWhat Data Are We Using?Kentucky Department of Education College and Career Readiness DataEasily Found on their websiteStep 1: Load Up Tidyverse and Read In Datalibrary(tidyverse)ccr_data &lt;- read_csv(&#39;."/>
-
-<meta name="generator" content="Hugo 0.20.6" />
+<meta name="generator" content="Hugo 0.26" />
 
 
     
@@ -45,7 +37,7 @@
   "@type": "BlogPosting",
   "headline": "EDA and Basic Data Munging with Public Data",
   "url": "/2017/07/28/eda-and-basic-data-munging-with-public-data/",
-  "wordCount": "3113",
+  "wordCount": "2362",
   "datePublished": "2017-07-28T13:14:46-04:00",
   "dateModified": "2017-07-28T13:14:46-04:00",
   "author": {
@@ -527,181 +519,6 @@ ccr_tidy &lt;- aggregate_level(ccr_data_n, &#39;NBR_GRADUATES_WITH_DIPLOMA&#39;)
 <li>Most of the functions I write are anonymous, but not always!</li>
 </ul></li>
 </ul>
-</div>
-<div id="okay-so-what-next" class="section level2">
-<h2>OKAY SO WHAT NEXT</h2>
-<ul>
-<li>We’ve been working with one csv’s worth of data so far, but the BoE makes several years available. Let’s combine them!</li>
-<li>To do that, we will put all the code we’ve made so far into a function, and then bind all the data together using that function.</li>
-</ul>
-<pre class="r"><code>tidy_ccr &lt;- function(df, county){
-  tidy_df &lt;- df %&gt;% 
-    filter(DIST_NAME == county) %&gt;% 
-    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %&gt;% 
-    mutate(
-      # First Change
-      SCH_YEAR = map_int(SCH_YEAR, function(i){
-        case_when(
-          i == 20152016 ~ 2016L,
-          i == 20142015 ~ 2015L,
-          i == 20132014 ~ 2014L,
-          i == 20122013 ~ 2013L,
-          i == 20112012 ~ 2012L
-        )
-      }) %&gt;% ordered(),
-      SCH_NAME = str_replace_all(SCH_NAME, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% trimws(),
-      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric(),
-      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric()
-    ) %&gt;% 
-    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
-  
-  aggregate_level(tidy_df, &#39;NBR_GRADUATES_WITH_DIPLOMA&#39;) %&gt;% 
-    left_join(aggregate_level(tidy_df, &#39;NBR_CCR_REGULAR&#39;)) %&gt;% 
-    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&gt;% 
-    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&gt;% 
-    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
-           SCH_NAME = &#39;District Total&#39;) %&gt;% 
-    bind_rows(tidy_df)
-}
-
-bind_data &lt;- function(county){
-  bind_rows(
-    read_csv(&#39;./EDA_Munging_data/1516.csv&#39;) %&gt;% tidy_ccr(county),
-    read_csv(&#39;./EDA_Munging_data/1415.csv&#39;) %&gt;% tidy_ccr(county),
-    read_csv(&#39;./EDA_Munging_data/1314.csv&#39;) %&gt;% tidy_ccr(county),
-    read_csv(&#39;./EDA_Munging_data/1213.csv&#39;) %&gt;% tidy_ccr(county),
-    read_csv(&#39;./EDA_Munging_data/1112.csv&#39;) %&gt;% tidy_ccr(county)
-  )
-}
-
-jefferson_data &lt;- bind_data(&#39;Jefferson County&#39;)</code></pre>
-</div>
-<div id="now-you-get-it" class="section level1">
-<h1>Now You Get It!</h1>
-<ul>
-<li>You get it, right?
-<ul>
-<li>What does the <code>bind_data</code> function do? Can you explain it?</li>
-</ul></li>
-<li>I also made a change to the <code>SCH_YEAR</code> column, so that it work correctly.
-<ul>
-<li><code>case_when</code> is a sexy way to do <code>ifelse</code>.</li>
-<li>I also used another <code>map</code> function.</li>
-</ul></li>
-<li>Okay, so let’s take a look to make sure things aren’t too weird.</li>
-</ul>
-<pre class="r"><code>glimpse(jefferson_data)</code></pre>
-<pre><code>## Observations: 5,865
-## Variables: 5
-## $ DISAGG_LABEL &lt;chr&gt; &quot;African American&quot;, &quot;All Students&quot;, &quot;American Ind...
-## $ Level        &lt;chr&gt; &quot;NBR_GRADUATES_WITH_DIPLOMA&quot;, &quot;NBR_GRADUATES_WITH...
-## $ value        &lt;dbl&gt; 4135, 11958, 12, 493, 112, 333, 445, 401, 6276, 6...
-## $ SCH_YEAR     &lt;chr&gt; &quot;2016&quot;, &quot;2016&quot;, &quot;2016&quot;, &quot;2016&quot;, &quot;2016&quot;, &quot;2016&quot;, &quot;...
-## $ SCH_NAME     &lt;chr&gt; &quot;District Total&quot;, &quot;District Total&quot;, &quot;District Tot...</code></pre>
-<pre class="r"><code>jefferson_data$DISAGG_LABEL %&gt;% unique()</code></pre>
-<pre><code>##  [1] &quot;African American&quot;                             
-##  [2] &quot;All Students&quot;                                 
-##  [3] &quot;American Indian or Alaska Native&quot;             
-##  [4] &quot;Asian&quot;                                        
-##  [5] &quot;Disability-Alternate Only&quot;                    
-##  [6] &quot;Disability-With IEP (not including Alternate)&quot;
-##  [7] &quot;Disability-With IEP (Total)&quot;                  
-##  [8] &quot;English Learners&quot;                             
-##  [9] &quot;Female&quot;                                       
-## [10] &quot;Free/Reduced-Price Meals&quot;                     
-## [11] &quot;Gap Group (non-duplicated)&quot;                   
-## [12] &quot;Hispanic&quot;                                     
-## [13] &quot;Male&quot;                                         
-## [14] &quot;Migrant&quot;                                      
-## [15] &quot;Native Hawaiian or Other Pacific Islander&quot;    
-## [16] &quot;Two or more races&quot;                            
-## [17] &quot;White (Non-Hispanic)&quot;                         
-## [18] &quot;Limited English Proficiency&quot;</code></pre>
-<pre class="r"><code>jefferson_data$SCH_NAME %&gt;% unique()</code></pre>
-<pre><code>##  [1] &quot;District Total&quot;                 &quot;Atherton High School&quot;          
-##  [3] &quot;Ballard High&quot;                   &quot;Brown School&quot;                  
-##  [5] &quot;Butler Traditional High School&quot; &quot;Central High School&quot;           
-##  [7] &quot;Doss High&quot;                      &quot;Eastern High&quot;                  
-##  [9] &quot;Fairdale High School&quot;           &quot;Fern Creek High School&quot;        
-## [11] &quot;Iroquois High&quot;                  &quot;Jeffersontown High School&quot;     
-## [13] &quot;Louisville Male High School&quot;    &quot;Moore Traditional School&quot;      
-## [15] &quot;Pleasure Ridge Park High&quot;       &quot;Seneca High&quot;                   
-## [17] &quot;Southern High School&quot;           &quot;The Academy  Shawnee&quot;          
-## [19] &quot;Valley High School&quot;             &quot;Waggener High School&quot;          
-## [21] &quot;Western High School&quot;            &quot;duPont Manual High&quot;            
-## [23] &quot;Dupont Manual High&quot;             &quot;Fern Creek Traditional High&quot;   
-## [25] &quot;Fairdale High School MCA&quot;</code></pre>
-<pre class="r"><code>tidy_ccr &lt;- function(df, county){
-  tidy_df &lt;- df %&gt;% 
-    filter(DIST_NAME == county) %&gt;% 
-    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %&gt;% 
-    mutate(
-      SCH_YEAR = map_int(SCH_YEAR, function(i){
-        case_when(
-          i == 20152016 ~ 2016L,
-          i == 20142015 ~ 2015L,
-          i == 20132014 ~ 2014L,
-          i == 20122013 ~ 2013L,
-          i == 20112012 ~ 2012L
-        )
-      }) %&gt;% ordered(),
-      SCH_NAME = map_chr(SCH_NAME, function(i){
-        if(i == &#39;Dupont Manual High&#39;) &#39;duPont Manual High&#39;
-        else if(i == &#39;Fern Creek Traditional High&#39;) &#39;Fern Creek High School&#39;
-        else if(i == &#39;Fairdale High School MCA&#39;) &#39;Fairdale High School&#39;
-        else str_replace_all(i, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% trimws()
-      }),
-      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric(),
-      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric()
-    ) %&gt;% 
-    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
-  
-  aggregate_level(tidy_df, &#39;NBR_GRADUATES_WITH_DIPLOMA&#39;) %&gt;% 
-    left_join(aggregate_level(tidy_df, &#39;NBR_CCR_REGULAR&#39;)) %&gt;% 
-    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&gt;% 
-    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&gt;% 
-    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
-           SCH_NAME = &#39;District Total&#39;) %&gt;% 
-    bind_rows(tidy_df)
-}
-
-jefferson_data &lt;- bind_data(&#39;Jefferson County&#39;)</code></pre>
-<div id="fixing-the-weirdness" class="section level2">
-<h2>Fixing the Weirdness</h2>
-<ul>
-<li>The <code>SCH_NAME</code> field was not consistent across the data, so we fixed it.
-<ul>
-<li>We used an iterator, which is a little more advaced than we are going today (probably)</li>
-</ul></li>
-</ul>
-</div>
-<div id="now-weve-got-tidy-data" class="section level2">
-<h2>NOW WE’VE GOT TIDY DATA!!!!</h2>
-<ul>
-<li>Let’s do some basic visualizations!</li>
-</ul>
-<pre class="r"><code>facet_ccr &lt;- function(df, lev){
-  ggplot(df %&gt;% 
-         filter(SCH_NAME != &#39;District Total&#39;,
-                Level == &#39;PCT_CCR_NO_BONUS&#39;, 
-                DISAGG_LABEL == lev), 
-       aes(x = SCH_YEAR, y = value, group = 1)) + 
-  geom_smooth() +
-  geom_point() +
-  ggtitle(&#39;Percent College Career Ready by School, 2012 - 2016&#39;,
-          subtitle = lev) +
-  facet_wrap(~SCH_NAME) +
-  theme_minimal()
-}
-
-j&lt;- bind_data(&#39;Jefferson County&#39;)
-f &lt;- bind_data(&#39;Fayette County&#39;)
-
-facet_ccr(j, &#39;All Students&#39;)</code></pre>
-<p><img src="../../../../post/EDA_Munging_files/figure-html/Viz-1.png" width="672" /></p>
-<pre class="r"><code>facet_ccr(f, &#39;All Students&#39;)</code></pre>
-<p><img src="../../../../post/EDA_Munging_files/figure-html/Viz-2.png" width="672" /></p>
-</div>
 </div>
 
 

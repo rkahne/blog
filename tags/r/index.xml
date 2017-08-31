@@ -6,10 +6,20 @@
     <description>Recent content in R on Blog - Robert Kahne</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Jul 2017 13:14:46 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 31 Aug 2017 13:14:46 -0400</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kentucky Legislature Twitter Analysis</title>
+      <link>/2017/08/31/kentucky-legislature-twitter-analysis/</link>
+      <pubDate>Thu, 31 Aug 2017 13:14:46 -0400</pubDate>
+      
+      <guid>/2017/08/31/kentucky-legislature-twitter-analysis/</guid>
+      <description>The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.
+Method!The Kentucky Legislative Research Commission director, David Byerman, manages a list of all the Kentucky legislators who use the twitter application.</description>
+    </item>
     
     <item>
       <title>EDA and Basic Data Munging with Public Data</title>
