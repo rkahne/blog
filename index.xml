@@ -6,10 +6,19 @@
     <description>Recent content on Blog - Robert Kahne</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Jul 2017 13:14:46 -0400</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>EDA and Basic Data Munging with Public Data</title>
+      <link>/2017/07/28/eda-and-basic-data-munging-with-public-data/</link>
+      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
+      
+      <guid>/2017/07/28/eda-and-basic-data-munging-with-public-data/</guid>
+      <description>What are we about to do?Learn the most important idioms for data munging in RApply them to an open data exampleBy the end, I hope you can use these skills to repeat this process with data you findWhat Data Are We Using?Kentucky Department of Education College and Career Readiness DataEasily Found on their websiteStep 1: Load Up Tidyverse and Read In Datalibrary(tidyverse)ccr_data &amp;lt;- read_csv(&amp;#39;.</description>
+    </item>
     
     <item>
       <title>Democratic House Targets</title>
