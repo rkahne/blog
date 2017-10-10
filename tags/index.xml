@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Tags on Blog - Robert Kahne </title>
+    <title>Tags on Blog - Robert Kahne</title>
     <link>/tags/</link>
+    <description>Recent content in Tags on Blog - Robert Kahne</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <author>Alexander Ivanov</author>
-    <updated>2017-10-10 13:12:32 -0400 EDT</updated>
+    <lastBuildDate>Tue, 10 Oct 2017 13:12:32 -0400</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Government</title>
       <link>/tags/government/</link>
-      <pubDate>Tue, 10 Oct 2017 13:12:32 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
+      
       <guid>/tags/government/</guid>
       <description></description>
     </item>
@@ -19,8 +23,8 @@
     <item>
       <title>Kentucky</title>
       <link>/tags/kentucky/</link>
-      <pubDate>Tue, 10 Oct 2017 13:12:32 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
+      
       <guid>/tags/kentucky/</guid>
       <description></description>
     </item>
@@ -28,8 +32,8 @@
     <item>
       <title>Learning</title>
       <link>/tags/learning/</link>
-      <pubDate>Fri, 28 Jul 2017 13:14:46 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
+      
       <guid>/tags/learning/</guid>
       <description></description>
     </item>
@@ -37,8 +41,8 @@
     <item>
       <title>Open Data</title>
       <link>/tags/open-data/</link>
-      <pubDate>Fri, 28 Jul 2017 13:14:46 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
+      
       <guid>/tags/open-data/</guid>
       <description></description>
     </item>
@@ -46,8 +50,8 @@
     <item>
       <title>Politics</title>
       <link>/tags/politics/</link>
-      <pubDate>Thu, 27 Apr 2017 00:00:00 &#43;0000</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
       <guid>/tags/politics/</guid>
       <description></description>
     </item>
@@ -55,8 +59,8 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Tue, 10 Oct 2017 13:12:32 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
+      
       <guid>/tags/r/</guid>
       <description></description>
     </item>

@@ -1,337 +1,54 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Government on Blog - Robert Kahne </title>
+    <title>Government on Blog - Robert Kahne</title>
     <link>/tags/government/</link>
+    <description>Recent content in Government on Blog - Robert Kahne</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <author>Alexander Ivanov</author>
-    <updated>2017-10-10 13:12:32 -0400 EDT</updated>
+    <lastBuildDate>Tue, 10 Oct 2017 13:12:32 -0400</lastBuildDate>
+    
+	<atom:link href="/tags/government/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>The Yarmuth Score</title>
       <link>/2017/10/10/the-yarmuth-score/</link>
-      <pubDate>Tue, 10 Oct 2017 13:12:32 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
+      
       <guid>/2017/10/10/the-yarmuth-score/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/yarmuth.jpg&#34; width=&#34;500px&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;This is John Yarmuth, Kentucky’s third district Congressman. Since 2012, he’s been the only Democrat in Kentucky’s congressional delegation. Without a doubt, Congressman Yarmuth is the most liberal Kentucky US House Member to have served this century.&lt;/p&gt;
-&lt;p&gt;While the rest of Kentucky’s delegation has been more conservative than Congressman Yarmuth, I don’t think anyone has ever done any real work to measure the &lt;em&gt;magnitude&lt;/em&gt; by which Congressman Yarmuth is the most liberal. So, I did it! To accomplish this task, I used the &lt;a href=&#34;https://projects.propublica.org/api-docs/congress-api/&#34;&gt;Pro Publica Congress API&lt;/a&gt;. This is a great tool, and even provides the ability to automatically compare two congresspeople. All the data for these comparisons comes directly from that API.&lt;/p&gt;
-&lt;p&gt;When I started this project, I thought it would be about people – and it is. But, this project ended up also being about the nature of government in the US. Kentucky Republican House members have changed over time, but the story in each district is very similar: since the GOP took over the House of Representatives in the 112th Congress, the House has been bitterly divided in a way it wasn’t before that. When it comes to voting records, even Representatives who are anecdotally understood to be more “moderate” actually cast their votes in a very partisan way. There have been many stories about this phenomenon from a national perspective, and I’m happy to tell the story from Kentucky.&lt;/p&gt;
-&lt;div id=&#34;district-6&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;District 6&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/chandler.jpg&#34; width=&#34;200px&#34; /&gt;&lt;img src=&#34;./yarmuth_score_files/img/barr.jpg&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;From 2007 until 2013, the sixth district was represented by Ben Chandler – the only Democrat from Kentucky with whom Congressman Yarmuth has served. Since 2013, the district has been represented by Andy Barr. Chandler was considered to be significantly more conservative than John Yarmuth, but he ended up voting with Congressman Yarmuth nearly 90% of the time in total. Congressman Barr has voted with Congressman Yarmuth significantly fewer times than Congressman Chandler. The sixth district is Central Kentucky.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Ben Chandler’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 89%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Andy Barr’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 25%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The chart below shows the trend over time for the sixth district congressperson’s record of voting with Congressman Yarmuth. During Congressman Chandler’s last term, he voted less and less with Congressman Yarmuth. During the 112th congress (2010-2012), Congressman Chandler faced a serious challenge from Andy Barr, which he ended up losing. The 2012 election was the first with the current map – the sixth district added some Eastern Kentucky counties, and lost some counties in the Bluegrass region of Kentucky. Congressman Chandler might have moderated his positions to attempt to remain competitive in his district. Additionally, the House changed hands in 2010 from Democrats hands to John Boehner’s GOP. This meant that more divisive legislation meant to put Democrats in awkward positions came to the floor. As a more vulnerable Democrat, Congressman Chandler might have felt the need to vote against Congressman Yarmuth in some token votes.&lt;/p&gt;
-&lt;p&gt;The sixth district is a good case study in the difference between a “Blue Dog Democrat” and a Republican. While it’s true that Congressman Chandler voted less with Congressman Yarmuth as time went along, Congressman Barr almost never votes with Congressman Yarmuth – Congressman Barr voted against Congressman Yarmuth 62% more in his first term than Congressman Chandler did in his final term.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/yarmuth_score_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;district-5&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;District 5&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/rogers.jpg&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Hal Rogers is the only Congressperson from Kentucky who has served longer than Congressman Yarmuth. He represents the fifth district, which is in the Eastern part of the state.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Hal Rogers’ &lt;code&gt;Yarmuth Score&lt;/code&gt;: 39%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Rogers’ &lt;code&gt;Yarmuth Score&lt;/code&gt; is the highest among Kentucky Congresspeople currently serving. Rogers has also voted on more of the same bills as Congressman Yarmuth than any other Congressperson from Kentucky since Congressman Yarmuth began serving – Rogers has voted on 12% more bills than Congressman Whitfield, who has the second most “common votes.”&lt;/p&gt;
-&lt;p&gt;It’s clear from the chart below that Rogers has voted with Yarmuth significantly fewer times since the 112th congress (after 2012). This is a good indicator of how our nation’s Congress has become more polarized – since the House moved to GOP control in 2012, Congressman Rogers voted less and less with Congressman Yarmuth. However, even when restricting to votes taken since the 112th congress, Rogers is still the current Kentucky Congressman most likely to vote with Congressman Yarmuth.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/yarmuth_score_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;district-4&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;District 4&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/davis.jpg&#34; width=&#34;200px&#34; /&gt;&lt;img src=&#34;./yarmuth_score_files/img/massie.jpg&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;For the first three terms of Congressman Yarmuth’s tenure, Geoff Davis was the 4th district Congressperson. At the end of Congressman Davis’s 4th term, he resigned, and Thomas Massie won both the special election to fill Congressman Davis’ seat for the remainder of the 112th Congress, and the general election to the 113th Congress. Congressman Massie has won reelection twice. While Congressman Massie is not a part of the very conservative group of Congresspeople called the House Freedom Caucus, he often aligns with and defends that group. The fourth district covers most of Kentucky along the Ohio River from far eastern Jefferson County to western Boyd County. Fun fact: my maternal grandparents and paternal grandfather live about a 3 hour drive from one another, yet all vote in the 4th district.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Geoff Davis’ &lt;code&gt;Yarmuth Score&lt;/code&gt;: 42%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Thomas Massie’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 27%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The story of the fourth district is much the same as the fifth district, with a significant shift in &lt;code&gt;Yarmuth Score&lt;/code&gt; between the 111th and 112th Congress. (I almost didn’t include Congressman Massie’s score for the 112th congress, as only 46 votes were in common, and they were all at the end of the Congress, which includes a significant number of wrap-up votes). While it’s easy to say that Congressman Massie is much more conservative than Congressman Davis, it’s worth noting that during Congressman Davis’ final term, his &lt;code&gt;Yarmuth Score&lt;/code&gt; was only 27% – very close to Congressman Massie’s numbers during his three terms. While Congressman Davis has the highest overall &lt;code&gt;Yarmuth Score&lt;/code&gt; for a Republican, his final term was a stark departure from that. It’s worth wondering if the change in partisan control of the House has more to do with these scores than the Representatives themselves.&lt;/p&gt;
-&lt;p&gt;Congressman Massie is also a good example of how the &lt;code&gt;Yarmuth Score&lt;/code&gt; is an imperfect measure. Votes are binary, by nature. For example, the reasons both &lt;a href=&#34;https://twitter.com/HouseBudgetDems/status/845026286879883270&#34;&gt;Congressman Yarmuth&lt;/a&gt; and &lt;a href=&#34;https://twitter.com/RepThomasMassie/status/844646398092029952&#34;&gt;Congressman Massie&lt;/a&gt; voted against the recent GOP replacement for the Affordable Care Act were very different – but the score just sees that they both opposed the bill, and record that as a similarity.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/yarmuth_score_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;district-2&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;District 2&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/lewis.jpeg&#34; width=&#34;200px&#34; /&gt;&lt;img src=&#34;./yarmuth_score_files/img/guthrie.jpg&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Ron Lewis served as the second district Congressperson in Kentucky between 1994 and 2008, and announced his retirement on the filing deadline. Many people thought this action was an attempt to steer the seat to his chief of staff, but Brett Guthrie also managed to file his paperwork before the deadline, and managed to run such a good primary campaign that his opponent dropped out of the race. Congressman Guthrie has served ever since, and has only faced marginal opposition. The second district covers most of the western Pennyrile, “South Central” Kentucky, and some of Central Kentucky (Owensboro, Elizabethtown, Bowling Green, Glasgow, and Danville are all in the second district).&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Ron Lewis’ &lt;code&gt;Yarmuth Score&lt;/code&gt;: 42%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Brett Guthrie’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 35%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The story of the second district stays consistent with the rest of the data so far: increased polarization since the 112th congress. Congressman Lewis’ aggregated score is the second highest among Republicans. However, Congressman Guthrie’s first term &lt;code&gt;Yarmuth Score&lt;/code&gt; was 58% – on par with Hal Rogers or Geoff Davis during that time. However, since 2012, Congressman Guthrie’s score has dropped, leaving him with one of the lowest overall &lt;code&gt;Yarmuth Scores&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/yarmuth_score_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;district-1&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;District 1&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;./yarmuth_score_files/img/whitfield.jpg&#34; width=&#34;200px&#34; /&gt;&lt;img src=&#34;./yarmuth_score_files/img/comer.jpg&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Ed Whitfield was swept into office as a part of Newt Gingrich’s “Contract with America” in 1995. He served in this seat until the end of his 11th term, when he resigned. James Comer, who had served as Kentucky’s Agriculture Commissioner and had been very narrowly defeated in the Republican Gubernatorial Primary by Matt Bevin, ran for the first district seat and won. The first district is an odd-shaped district that covers all of the Jackson Purchase and the eastern Pennyrile, and then covers the southern most counties in “South Central” Kentucky, then stretches north into the historically Catholic counties in Central Kentucky (Murray, Paducah, Henderson, Scottsville, Campbellsville, and Lebanon are all in the first district)&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Ed Whitfield’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 41%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;James Comer’s &lt;code&gt;Yarmuth Score&lt;/code&gt;: 22%&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;At this point, it’s clear that these scores are more about the increasing partisanship in our Congress than they are about any individual person. By all accounts, James Comer is a relatively moderate person. When he was elected to Agriculture Commissioner in 2011, he worked very closely with Democratic Auditor Adam Edelen, and has worked again with Mr. Edelen in his “New Kentucky Project” with Matt Jones, which is mostly a Democratic affair. Despite this, Representative Comer has the very lowest &lt;code&gt;Yarmuth Score&lt;/code&gt; of any Kentucky Congressperson.&lt;/p&gt;
-&lt;p&gt;It could be, though, that Representative Comer is more conservative than expected. Even when restricting to the 115th Congress, Rep. Comer has the lowest &lt;code&gt;Yarmuth Score&lt;/code&gt;, 20% – which is 23% lower than Rep. Rogers’ score during the 115th Congress. It’s likely a combination of these two elements: Rep. Comer is both more conservative than expected, and a victim of increased partisanship in the US House of Representatives.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/yarmuth_score_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I started working on this project hoping to tell a story about which of Kentucky’s Congresspeople were more and less conservative, but this story is more about increased partisanship. The US House has changed significantly during Congressman Yarmuth’s tenure – while in some Congresses, Kentucky Republican Representatives voted with him more than half the time, nowadays, they vote with him less than a third of the time. While it’s hard to say if Kentuckians have elected more conservative Representatives, or the larger dynamics of partisanship in our federal Congress are to blame, the conclusion is that Republicans and Democrats – even in Kentucky – are more divided than ever.&lt;/p&gt;
-&lt;/div&gt;
-</description>
+      <description>This is John Yarmuth, Kentucky’s third district Congressman. Since 2012, he’s been the only Democrat in Kentucky’s congressional delegation. Without a doubt, Congressman Yarmuth is the most liberal Kentucky US House Member to have served this century.
+While the rest of Kentucky’s delegation has been more conservative than Congressman Yarmuth, I don’t think anyone has ever done any real work to measure the magnitude by which Congressman Yarmuth is the most liberal.</description>
+    </item>
+    
+    <item>
+      <title>The Yarmuth Score</title>
+      <link>/2017/10/10/the-yarmuth-score/</link>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
+      
+      <guid>/2017/10/10/the-yarmuth-score/</guid>
+      <description>This is John Yarmuth, Kentucky’s third district Congressman. Since 2012, he’s been the only Democrat in Kentucky’s congressional delegation. Without a doubt, Congressman Yarmuth is the most liberal Kentucky US House Member to have served this century.
+While the rest of Kentucky’s delegation has been more conservative than Congressman Yarmuth, I don’t think anyone has ever done any real work to measure the magnitude by which Congressman Yarmuth is the most liberal.</description>
     </item>
     
     <item>
       <title>Kentucky Legislature Twitter Analysis</title>
       <link>/2017/08/31/kentucky-legislature-twitter-analysis/</link>
-      <pubDate>Thu, 31 Aug 2017 13:14:46 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Thu, 31 Aug 2017 13:14:46 -0400</pubDate>
+      
       <guid>/2017/08/31/kentucky-legislature-twitter-analysis/</guid>
-      <description>&lt;p&gt;The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.&lt;/p&gt;
-&lt;div id=&#34;method&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Method!&lt;/h2&gt;
-&lt;p&gt;The Kentucky Legislative Research Commission director, &lt;a href=&#34;https://twitter.com/DirectorLRC&#34;&gt;David Byerman&lt;/a&gt;, manages a list of all the Kentucky legislators who use the twitter application. When I was a student in the &lt;a href=&#34;https://www.codelouisville.org/&#34;&gt;Code Louisville&lt;/a&gt; program, I registered a twitter application that I never used. I repurposed that application to pull data from the twitter API about legislators tweets.&lt;/p&gt;
-&lt;p&gt;In order to grab the usernames of the legislators, I used the browser-based &lt;a href=&#34;https://dev.twitter.com/rest/tools/console&#34;&gt;Twitter API console&lt;/a&gt;, and then used the R package &lt;code&gt;rtweet&lt;/code&gt; to pull the timelines of the legislators. For this exercise, I grabbed only the tweets since January 1, 2017 (the 2017 legislative session started shortly after that). I pulled the public data about the legislators accounts on August 20, 2017, and last refreshed the timelines of the legislators around 10:00 PM on August 30, 2017.&lt;/p&gt;
-&lt;p&gt;As always, I used the R language to analyze the data and produce the visualizations seen below. The graphics are mostly faceted by party, which is good for being able to read names, but does result in the loss of some interesting information. I’m happy to make you custom graphs if you ask nicely.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;twitter-a-popularity-contest&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Twitter: A Popularity Contest&lt;/h2&gt;
-&lt;p&gt;Politicians, by nature, care about being popular. It’s how they get elected! Personally, I think politicians use twitter at rate disproportionate to the population as a whole because the app puts metrics around how popular each person is. The most important metrics to most people are the number of people who follow your account. (I recently cracked &lt;a href=&#34;https://twitter.com/rkahne&#34;&gt;1,000&lt;/a&gt; and I was embarrassed about how excited I was). Here are is how many people follow each member of the legislature:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/followers-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Rep. Brandon Reed (R-Hodgenville) is the legislator with the most followers. Rep. Attica Scott (D-Louisville), is second. Both of them are Freshmen legislators. Using a mean, Republicans have a larger average following, 1,449 to 1,346. However, Democrats have the advantage when we use median to judge the average, 1120 to 985.&lt;/p&gt;
-&lt;p&gt;Now, let’s take a look at who is on #TeamFollowBack:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/following-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Rep. Reed is definitely &lt;em&gt;NOT&lt;/em&gt; on #TeamFollowBack, as he only follows 253 accounts, 97% fewer than the number that follow him. However, it’s pretty clear that Democratic women are good listeners – out of the six Democrats who follow the most accounts, five are women. Also, Julia Raque Adams is the only Republican woman in the top ten of her caucus using that metric.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;heavy-users&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Heavy Users&lt;/h2&gt;
-&lt;p&gt;The twitter API gives us all the tweets from an account, including retweets. I thought it would be interesting to look at who used twitter the most – both by writing their own tweets, and by retweeting others.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20and%20retweets-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Rep. Scott and Sen. Whitney Westerfield (R-Hopkinsville) (both former guests on &lt;a href=&#34;http://myoldkentuckypodcast.podbean.com/&#34;&gt;My Old Kentucky Podcast&lt;/a&gt;!) are the heaviest users of twitter overall, with 2,584 and 2,265 tweets since the new year, respectively. However, when looking at original content only, Rep. Jason Nemes (R-Louisville) and Sen. Reggie Thomas (D-Lexington) are among the heavier users. These four legislators are the only members who have sent more than 750 original tweets since the beginning of 2017. The story of retweets is similar to the story about the number of accounts followed: three Democratic women lead their caucus.&lt;/p&gt;
-&lt;p&gt;Let’s look at the average by party:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20per%20legislator-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;While Democrats and Republicans have about the same amount of retweets per legislator (&lt;code&gt;total number of retweets&lt;/code&gt; / &lt;code&gt;number of caucus members on twitter&lt;/code&gt;), Democrats send significantly more original tweets.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;who-up&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Who Up?&lt;/h2&gt;
-&lt;p&gt;The twitter API gives us access to the exact moment each tweet was sent. That’s fun. Let’s take a look at the tweets over time using density plots, and then a density plot of the time of day when each tweet was sent (this one is fun):&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20over%20time-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The legislative session kicked off in January, and then, after organizing, took a break for about a month. Then, they were back in session until March. This is reflected clearly in this data. Tweets are on the rise again, though! It might be about national politics, or the calls for a special session about pensions and tax reform.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20by%20time%20of%20day-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Legislators stay up late! The MOST COMMON time at which tweets were sent was after midnight. Not until about about 2:30 AM does the tweeting stop! Y’all need to go to bed. Nothing good ever happened to an elected official after the bars close.&lt;/p&gt;
-&lt;p&gt;This is begging to be analyzed by party. Let’s take a look:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/time%20by%20party-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/time%20by%20party-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It looks like the peaks and valleys around the legislative session were more pronounced among Democrats. Democrats also seemed to have a significant bump in tweets during the early summer.&lt;/p&gt;
-&lt;p&gt;Regarding time of day: it looks like Republicans are the culprits when it comes to who stays up late. Democrats definitely stay up late as well, but the most common time for Dems to tweet is around noon. The GOP peaks about 1:00 AM.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;sentiment-analysis-using-tidytext&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Sentiment Analysis Using &lt;code&gt;tidytext&lt;/code&gt;!&lt;/h2&gt;
-&lt;p&gt;Sentiment analysis is a process by which individual words are associated with specific sentiments. To do this, data analysts utilize lexicons. Lexicons used in sentiment analysis identify words which are inherently positive and negative. These lexicons are the word of researchers (typically in linguistics) who have done the association. Sentiment analysis allows us to gauge the overall feelings in a piece of writing or group of statements. By performing this type of analysis, we gain insight into the mood of the writer/speaker/commenter. &lt;strong&gt;THIS WORK IS INHERENTLY PROBLEMATIC&lt;/strong&gt;. Please know that while you read it, and don’t form your FULL opinion about these legislators using sentiment analysis. However, I think this kind of work is still really useful! Let’s first take a look at the sentiment by legislator using the &lt;code&gt;Bing&lt;/code&gt; lexicon. The &lt;a href=&#34;https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html&#34;&gt;Bing&lt;/a&gt; lexicon was developed by Bing Liu (et al) and is a very straightforward positive-negative lexicon. It includes 6,788 words.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/bing%20pops-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;I used the incredible &lt;code&gt;tidytext&lt;/code&gt; package to do this analysis. I pulled each word out of all the tweets, and scaled them using the &lt;code&gt;Bing&lt;/code&gt; lexicon. Then, I scaled by the number of tweets. We’ve already done enough analysis on who tweets the most: this shows us on average, which legislators use the most positive and negative words. The lollipops above 0 represent the usage rate of positive words, while the lollipops below 0 represent the usage rate of negative words. This graph is arranged by net sentiment: &lt;code&gt;positive&lt;/code&gt; words minus &lt;code&gt;negative&lt;/code&gt; words. You can see that Rep. Dennis Horlander and Rep. Mary Lou Marzian (both D-Louisville) have fairly high usage rate of positive words, but are among the most negative Democratic tweeters because of their high rates of negative words. Meanwhile, Rep. Reed, the legislator with the most followers, is the most positive Republican. This might help to explain how he has so many followers despite not that many actual tweets.&lt;/p&gt;
-&lt;p&gt;Let’s take a look by party!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/scaled%20sentiment%20by%20party-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Republicans are more emotive than Democrats, at least according to Bing, et al. The GOP has a higher usage rate of negative words AND positive words. While the GOP is only slightly less negative than the Democrats, their usage rate of positive words is double that of the Democrats.&lt;/p&gt;
-&lt;p&gt;“Positive” and “Negative” are straightforward, but they aren’t very descriptive. The other lexicon I used is the &lt;a href=&#34;http://saifmohammad.com/WebPages/lexicons.html&#34;&gt;NRC Emotion Lexicon&lt;/a&gt;. In addition to positive and negative sentiments, this lexicon also adds eight emotions, which adds a level of specificity into the analysis. The NRC lexicon includes 13,301 words, which is WAY more than Bing. The best way to view this is in a treemap:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/treeplot-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It looks like the emotions most likely to be expressed by Kentucky legislators are “positive” and “anticipation”. I think it’s good to have forward looking legislators! It also appears that emotions that tile towards “positive” such as “trust” and “joy” outnumber those that tilt negative, like “fear” and “disgust”.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;in-conclusion&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;In Conclusion&lt;/h2&gt;
-&lt;p&gt;I hope you found some of this a little informative! I enjoyed putting it together. If you’d like to dig deeper, check out this &lt;a href=&#34;https://rkahne.shinyapps.io/kyleg_twitter/&#34;&gt;shiny app&lt;/a&gt; I built. You can drill down to view the twitter behavior of individual legislators! (I hope they don’t get TOO mad at me – I’ll take it down if they promise to raise taxes on cigarettes and expand the sales tax to luxury services). If you want to reach me, please do so at rkahne [at] gmail.com, or, of course, on Twitter &lt;span class=&#34;citation&#34;&gt;[@rkahne]&lt;/span&gt;(&lt;a href=&#34;https://twitter.com/rkahne&#34; class=&#34;uri&#34;&gt;https://twitter.com/rkahne&lt;/a&gt;).&lt;/p&gt;
-&lt;/div&gt;
-</description>
+      <description>The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.
+Method!The Kentucky Legislative Research Commission director, David Byerman, manages a list of all the Kentucky legislators who use the twitter application.</description>
     </item>
     
     <item>
       <title>W-Nominate Scores</title>
       <link>/2017/04/19/w-nominate-scores/</link>
-      <pubDate>Wed, 19 Apr 2017 13:14:46 EDT</pubDate>
-      <author>Alexander Ivanov</author>
+      <pubDate>Wed, 19 Apr 2017 13:14:46 -0400</pubDate>
+      
       <guid>/2017/04/19/w-nominate-scores/</guid>
-      <description>&lt;p&gt;A few days ago on &lt;a href=&#34;https://twitter.com/rkahne/status/852909621354385408&#34;&gt;twitter&lt;/a&gt;, I wrote about some work I had done regarding &lt;code&gt;W-Nominate&lt;/code&gt; scores and the Kentucky Legislature. I am getting the sense that many people are confused about what exactly &lt;code&gt;W-Nominate&lt;/code&gt; is and how it works. So, allow me to try and explain!&lt;/p&gt;
-&lt;div id=&#34;what-is-w-nominate&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;What is &lt;code&gt;W-Nominate&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;The technical description of &lt;a href=&#34;http://voteview.com/w-nominate.htm&#34;&gt;W-Nominate&lt;/a&gt;, taken directly from their site, is “a scaling procedure that performs parametric unfolding of binary choice data.” As input, the model takes as input a set of binary decisions (votes!) and gives as output a continuous variable that identifies where, along a left-right axis, a legislator falls. Essentially, the model looks at the votes, and tells us how liberal or conservative each legislator is.&lt;/p&gt;
-&lt;p&gt;The most common question I got about the &lt;code&gt;W-Nominate&lt;/code&gt; tweets I sent went something like: “How did you weight each vote?” I expect that many of these questions came from the fact that many of the existing rankings of Kentucky legislators are based on a few votes. Whoever does the work pulls the votes they are most concerned with, sees who voted which way on those few votes (maybe they apply a weight to a few of the most controversial votes), and then does a quick math problem.&lt;/p&gt;
-&lt;p&gt;This methodology is easy to understand, but it suffers from significant bias. This might not be an issue! The Chamber of Commerce issued a &lt;a href=&#34;https://issuu.com/kychamber/docs/results_for_business_2017&#34;&gt;ranking of legislators&lt;/a&gt; based on how they voted on bills the chamber supported. Obviously that’s biased, but for the Chamber, that’s a feature (not a bug). They are looking for how people voted on &lt;em&gt;their&lt;/em&gt; issues, and their methodology is based on &lt;em&gt;their&lt;/em&gt; bills. If you are looking for an unbiased ranking, though, &lt;code&gt;W-Nominate&lt;/code&gt; becomes very useful.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;W-Nominate&lt;/code&gt; methodology is completely agnostic about the text of a bill. In fact, I didn’t even pass the text or description of the bills to the model at all. The model see who voted &lt;em&gt;for&lt;/em&gt;, &lt;em&gt;against&lt;/em&gt;, and who &lt;em&gt;passed&lt;/em&gt; on each bill. The model does throw out all the votes which were very lopsided, throwing out bills that have less than 2.5% opposition. The model ended up keeping 81 House votes and 73 Senate votes (the Venn diagram of these votes is quite interesting, but that’s for another day). Since the only input are the votes and the algorithm looks at all the votes, we can be sure that the outputs do not include selection bias.&lt;/p&gt;
-&lt;p&gt;Actually, there is another input that &lt;code&gt;W-Nominate&lt;/code&gt; considers. The basis of the project was in looking at different dimensions of polarization in legislatures. The model was great at parsing out how different coalitions emerged around different issues. This used to be a much bigger deal in American government – think about “Southern Democrats” or “Liberal Republicans”. So, the model takes two legislators, typically of the same party, who are “conservative” on each of the particular dimensions of interest. If I were doing the 2002 US Senate, I would have picked Zell Miller and Jim Jeffords. For &lt;em&gt;this&lt;/em&gt; legislature, I picked Jeff Hoover and Stan Lee in the House, and Robert Stivers and Dan Seum in the Senate. The idea was “Republican in leadership from a rural area” juxtaposed with “very conservative Republican from an urban area.” In the end, there was only one dimension of interest, which we will see in a moment.&lt;/p&gt;
-&lt;div id=&#34;a-note-on-the-data&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;A Note on the Data&lt;/h3&gt;
-&lt;p&gt;This data came from a whole bunch of work done during the Data for Democracy Hackathon. I joined a bunch of other civically minded data folks to mine the Kentucky Legislative Research Commission website to digitize all the votes that took place during the 2017 legislative session. I’ve said thank you to all the people who were there several times, but, once again &lt;em&gt;&lt;em&gt;THANK YOU&lt;/em&gt;&lt;/em&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;output&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Output&lt;/h2&gt;
-&lt;p&gt;Before we get to the actually useful output, let’s take a look at the two dimensional data. Below is the 2D plot of the legislators (House first, Senate Second):&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/2D-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/2D-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt; You can clearly see that the Republicans and Democrats separate themselves on the left-right dimension, but the second dimension doesn’t seem to show any kind of useful information. If it did, we would see legislators bunching into one corner or another, or perhaps separate groups separated into specific chunks. There is a type of plot we can use to gauge the usefulness of each dimension. A &lt;code&gt;scree&lt;/code&gt; plot is commonly used in principal component analysis to determine how many factors are useful. These types of plots typically look like a hockey stick laid on it side: the value to the far left is somewhat large, and the other values are small. All values that are &amp;gt;1 are typically useful for analysis. Here are the &lt;code&gt;scree&lt;/code&gt; plots for this analysis (again, House first, Senate Second): &lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/Scree-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/Scree-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt; As you can see, only the first dimension has a value in the &lt;code&gt;scree&lt;/code&gt; plot &amp;gt;1. So, the Kentucky legislature is arranged on a very linear scale: we can be very confident that legislators have arranged themselves on a left-right scale. Now that we know what we have, let’s look at more useful information. I’ve arranged the legislature on a left-right scale using the first dimension, using names. You won’t be able to see many of the names, but if you look closely, you can probably find your favorite (or least favorite) legislator. &lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/ggplots-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;img src=&#34;../../post/w_nominate_kyleg_files/figure-html/ggplots-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;analyzing-the-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Analyzing the Data&lt;/h2&gt;
-&lt;p&gt;Very little of this data is too surprising for people who have watched the Kentucky legislature very closely. Among Democrats, urban legislators and legislators of color are the most liberal. Republicans are incredibly bunched. This is not surprising: since Republicans are the majority in both houses, they set the agenda. They did not introduce much legislation that was controversial among Republicans, but did introduce lots of legislation that split the Democratic vote (for example, there were two major bills passed in the first week of the legislature which had to do with abortion).&lt;/p&gt;
-&lt;p&gt;To me, &lt;code&gt;W-Nominate&lt;/code&gt; scores are most useful for identifying which legislators don’t fit well in their seat. For Democrats, an “efficient” caucus is one where members are as liberal as their districts will allow. &lt;code&gt;W-Nominate&lt;/code&gt; scores can be used to see if a member who lives in a safe district is voting more conservatively than their district. The reverse is true for Republicans.&lt;/p&gt;
-&lt;p&gt;This exercise has shown me that the caucuses in the Kentucky legislature are very well sorted. No Republican is more liberal than any Democrat and no Democrat is more conservative than any Republican. The more liberal Republicans tend to be from more liberal districts, and more conservative Democrats are from more conservative districts. This is in-line with the polarization being experienced in legislatures in state capitols across the country as well as Washington. There are those who argue that this polarization is a bad thing–that might be true, but it does seem to exist because of a response to incentives.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;appendices&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Appendices&lt;/h1&gt;
-&lt;div id=&#34;house-rankings&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;House Rankings&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;##       LastUnique     coord1D
-## 1        Marzian -0.96654087
-## 2        Donohue -0.90245730
-## 3          Owens -0.88865906
-## 4          Meeks -0.85427606
-## 5        Brown G -0.82766420
-## 6          Scott -0.82259154
-## 7          Flood -0.79076236
-## 8        Jenkins -0.76927090
-## 9         Graham -0.65903789
-## 10           Kay -0.65327841
-## 11         Wayne -0.64629513
-## 12         Keene -0.63711607
-## 13        Overly -0.60628235
-## 14         Burch -0.51275474
-## 15      Cantrell -0.44531900
-## 16       Palumbo -0.41847119
-## 17      Harris C -0.40030053
-## 18         Meyer -0.34463796
-## 19        Adkins -0.31591845
-## 20          Rand -0.29358628
-## 21      Sinnette -0.29099798
-## 22       Westrom -0.26179108
-## 23      Miller C -0.23662980
-## 24        Hatton -0.23636524
-## 25         Stone -0.17262219
-## 26         Greer -0.16480376
-## 27        Gentry -0.16343912
-## 28        Nelson -0.14892411
-## 29       Simpson -0.14840549
-## 30       Coursey -0.13578099
-## 31          Sims -0.13426811
-## 32      Schamore -0.12586974
-## 33         Riggs  0.03597225
-## 34     Horlander  0.03645050
-## 35      Richards  0.04008208
-## 36       Watkins  0.11957118
-## 37          York  0.33557713
-## 38       Blanton  0.44182494
-## 39          Hale  0.54759967
-## 40      Turner T  0.55568540
-## 41        Fugate  0.56489205
-## 42         Wells  0.57907975
-## 43         Couch  0.60544920
-## 44       Castlen  0.61197847
-## 45       Brown L  0.65529990
-## 46       Stewart  0.69094294
-## 47       Bentley  0.69582790
-## 48       Elliott  0.70432097
-## 49        Prunty  0.74676251
-## 50          Reed  0.75306284
-## 51         Mills  0.76245576
-## 52    Meredith M  0.76637816
-## 53        Tipton  0.76768082
-## 54        Petrie  0.79266095
-## 55          Imes  0.79448766
-## 56     Johnson D  0.80352467
-## 57        Morgan  0.80890256
-## 58      Mayfield  0.81477058
-## 59         Bunch  0.81926787
-## 60       Rowland  0.84736472
-## 61        Koenig  0.85252869
-## 62        Hoover  0.85317081
-## 63         Riley  0.85949564
-## 64        Herald  0.86580044
-## 65         Miles  0.86775696
-## 66         McCoy  0.86918968
-## 67        Carney  0.87699771
-## 68       Bechler  0.88144022
-## 69     DuPlessis  0.88496423
-## 70          Rudy  0.88606799
-## 71         Moore  0.88951594
-## 72      DeCesare  0.89447826
-## 73         Heath  0.89491242
-## 74  Rothenburger  0.89621770
-## 75      Miller J  0.89643848
-## 76       Dossett  0.89673853
-## 77       Fleming  0.89679170
-## 78    Johnson DJ  0.89679170
-## 79       Osborne  0.89679170
-## 80        Webber  0.89679170
-## 81      Thomas W  0.89695787
-## 82         Meade  0.89706510
-## 83         Shell  0.89847004
-## 84         Gooch  0.89975709
-## 85          King  0.90497029
-## 86      Upchurch  0.90541989
-## 87         Moser  0.90611392
-## 88           Lee  0.90622902
-## 89        Linder  0.93156302
-## 90         Pratt  0.93817884
-## 91          Hart  0.93867564
-## 92     Benvenuti  0.93913352
-## 93       Santoro  0.94651902
-## 94       Moffett  0.96065384
-## 95      Bratcher  0.96448356
-## 96         Nemes  0.97796690
-## 97       Wuchner  0.98133850
-## 98      St. Onge  0.98296613
-## 99       Fischer  0.98806447
-## 100        Rader          NA&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;senate-rankings&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Senate Rankings&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;##      LastUnique    coord1D
-## 1          Neal -0.9150258
-## 2      McGarvey -0.9055449
-## 3         Clark -0.8730029
-## 4  Harper Angel -0.8507226
-## 5      Thomas R -0.7906787
-## 6          Webb -0.7493258
-## 7     Carroll J -0.7212076
-## 8      Jones II -0.6219026
-## 9        Ridley -0.5655608
-## 10     Turner J -0.5508873
-## 11      Parrett -0.1709758
-## 12    Embry Jr.  0.3934473
-## 13       Higdon  0.8014693
-## 14        Smith  0.8355390
-## 15        Adams  0.8378454
-## 16       Buford  0.8413646
-## 17     Alvarado  0.8474194
-## 18    Carpenter  0.8477566
-## 19     Harris E  0.8486871
-## 20  Westerfield  0.8491114
-## 21     Robinson  0.8509318
-## 22       Givens  0.8514937
-## 23         Kerr  0.8553522
-## 24    Humphries  0.8649142
-## 25    Carroll D  0.8779923
-## 26   Meredith S  0.8788131
-## 27   Stivers II  0.8799422
-## 28       Wilson  0.8801597
-## 29         Wise  0.8803453
-## 30         Seum  0.8872329
-## 31      Girdler  0.8901604
-## 32       Thayer  0.8916126
-## 33     Schickel  0.9143962
-## 34     Hornback  0.9272363
-## 35         West  0.9297551
-## 36        Bowen  0.9333903
-## 37     McDaniel  0.9477534
-## 38     Schroder  0.9568526&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>A few days ago on twitter, I wrote about some work I had done regarding W-Nominate scores and the Kentucky Legislature. I am getting the sense that many people are confused about what exactly W-Nominate is and how it works. So, allow me to try and explain!
+What is W-Nominate?The technical description of W-Nominate, taken directly from their site, is “a scaling procedure that performs parametric unfolding of binary choice data.</description>
     </item>
     
   </channel>
