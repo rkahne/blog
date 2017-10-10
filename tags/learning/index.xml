@@ -1,23 +1,603 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Learning on Blog - Robert Kahne</title>
+      <title>Learning on Blog - Robert Kahne </title>
     <link>/tags/learning/</link>
-    <description>Recent content in Learning on Blog - Robert Kahne</description>
-    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Jul 2017 13:14:46 -0400</lastBuildDate>
-    
-	<atom:link href="/tags/learning/index.xml" rel="self" type="application/rss+xml" />
-    
+    <author>Alexander Ivanov</author>
+    <updated>2017-07-28 13:14:46 -0400 EDT</updated>
     
     <item>
       <title>EDA and Basic Data Munging with Public Data</title>
       <link>/2017/07/28/eda-and-basic-data-munging-with-public-data/</link>
-      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
-      
+      <pubDate>Fri, 28 Jul 2017 13:14:46 EDT</pubDate>
+      <author>Alexander Ivanov</author>
       <guid>/2017/07/28/eda-and-basic-data-munging-with-public-data/</guid>
-      <description>What are we about to do?Learn the most important idioms for data munging in RApply them to an open data exampleBy the end, I hope you can use these skills to repeat this process with data you findWhat Data Are We Using?Kentucky Department of Education College and Career Readiness DataEasily Found on their websiteStep 1: Load Up Tidyverse and Read In Datalibrary(tidyverse)ccr_data &amp;lt;- read_csv(&amp;#39;.</description>
+      <description>&lt;div id=&#34;what-are-we-about-to-do&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What are we about to do?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Learn the most important idioms for data munging in R&lt;/li&gt;
+&lt;li&gt;Apply them to an open data example&lt;/li&gt;
+&lt;li&gt;By the end, I hope you can use these skills to repeat this process with data you find&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-data-are-we-using&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What Data Are We Using?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Kentucky Department of Education College and Career Readiness Data&lt;/li&gt;
+&lt;li&gt;Easily Found on their &lt;a href=&#34;http://applications.education.ky.gov/SRC/DataSets.aspx&#34;&gt;website&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;step-1-load-up-tidyverse-and-read-in-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Step 1: Load Up Tidyverse and Read In Data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+ccr_data &amp;lt;- read_csv(&amp;#39;./EDA_Munging_data/1516.csv&amp;#39;)
+
+glimpse(ccr_data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 6,902
+## Variables: 25
+## $ SCH_YEAR                   &amp;lt;int&amp;gt; 20152016, 20152016, 20152016, 20152...
+## $ CNTYNO                     &amp;lt;chr&amp;gt; &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, ...
+## $ CNTYNAME                   &amp;lt;chr&amp;gt; &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;,...
+## $ DIST_NUMBER                &amp;lt;chr&amp;gt; &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, ...
+## $ DIST_NAME                  &amp;lt;chr&amp;gt; &amp;quot;Adair County&amp;quot;, &amp;quot;Adair County&amp;quot;, &amp;quot;Ad...
+## $ SCH_NUMBER                 &amp;lt;chr&amp;gt; &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, ...
+## $ SCH_NAME                   &amp;lt;chr&amp;gt; &amp;quot;Adair County High School&amp;quot;, &amp;quot;Adair ...
+## $ SCH_CD                     &amp;lt;chr&amp;gt; &amp;quot;001010&amp;quot;, &amp;quot;001010&amp;quot;, &amp;quot;001010&amp;quot;, &amp;quot;0010...
+## $ SCH_TYPE                   &amp;lt;chr&amp;gt; &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;,...
+## $ STATE_SCH_ID               &amp;lt;chr&amp;gt; &amp;quot;001001010&amp;quot;, &amp;quot;001001010&amp;quot;, &amp;quot;00100101...
+## $ NCESID                     &amp;lt;dbl&amp;gt; 2.10003e+11, 2.10003e+11, 2.10003e+...
+## $ CATEGORY                   &amp;lt;chr&amp;gt; &amp;quot;Accountability&amp;quot;, &amp;quot;Accountability&amp;quot;,...
+## $ TEST_TYPE                  &amp;lt;chr&amp;gt; &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, ...
+## $ DISAGG_ORDER               &amp;lt;int&amp;gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1...
+## $ DISAGG_LABEL               &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &amp;lt;chr&amp;gt; &amp;quot;196&amp;quot;, &amp;quot;106&amp;quot;, &amp;quot;90&amp;quot;, &amp;quot;180&amp;quot;, &amp;quot;5*&amp;quot;, &amp;quot;8...
+## $ COLLEGE_READY              &amp;lt;int&amp;gt; 112, 54, 58, 106, NA, NA, NA, NA, N...
+## $ CAREER_READY_ACADEMIC      &amp;lt;int&amp;gt; 134, 70, 64, 124, NA, NA, NA, NA, N...
+## $ CAREER_READY_TECHNICAL     &amp;lt;int&amp;gt; 79, 44, 35, 77, NA, NA, NA, NA, NA,...
+## $ CAREER_READY_TOTAL         &amp;lt;int&amp;gt; 72, 40, 32, 72, NA, NA, NA, NA, NA,...
+## $ NBR_CCR_REGULAR            &amp;lt;int&amp;gt; 131, 65, 66, 125, NA, NA, NA, NA, N...
+## $ PCT_CCR_NO_BONUS           &amp;lt;dbl&amp;gt; 66.8, 61.3, 73.3, 69.4, NA, NA, NA,...
+## $ PCT_CCR_WITH_BONUS         &amp;lt;dbl&amp;gt; 80.9, 75.5, 87.2, 84.4, NA, NA, NA,...
+## $ COOP                       &amp;lt;chr&amp;gt; &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;,...
+## $ COOP_CODE                  &amp;lt;int&amp;gt; 902, 902, 902, 902, 902, 902, 902, ...&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;What do we have here?
+&lt;ul&gt;
+&lt;li&gt;Is this data &lt;em&gt;Wide&lt;/em&gt; or &lt;em&gt;Narrow&lt;/em&gt;? (or both?!?!?!)
+&lt;ul&gt;
+&lt;li&gt;Wide data has columns for each variable&lt;/li&gt;
+&lt;li&gt;Narrow data typically has a “variable” column and a “value” column and each variable is repeated multiple times.&lt;/li&gt;
+&lt;li&gt;R very much prefers narrow data&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What columns seem important?
+&lt;ul&gt;
+&lt;li&gt;Does this data have multiple columns that represent the same value?&lt;/li&gt;
+&lt;li&gt;Are there columns that don’t contain useful information?&lt;/li&gt;
+&lt;li&gt;Consider your purpose for looking at the data, what story seems interesting and relevant?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Look at data
+glimpse(ccr_data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 6,902
+## Variables: 25
+## $ SCH_YEAR                   &amp;lt;int&amp;gt; 20152016, 20152016, 20152016, 20152...
+## $ CNTYNO                     &amp;lt;chr&amp;gt; &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, ...
+## $ CNTYNAME                   &amp;lt;chr&amp;gt; &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;, &amp;quot;ADAIR&amp;quot;,...
+## $ DIST_NUMBER                &amp;lt;chr&amp;gt; &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, &amp;quot;001&amp;quot;, ...
+## $ DIST_NAME                  &amp;lt;chr&amp;gt; &amp;quot;Adair County&amp;quot;, &amp;quot;Adair County&amp;quot;, &amp;quot;Ad...
+## $ SCH_NUMBER                 &amp;lt;chr&amp;gt; &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, &amp;quot;010&amp;quot;, ...
+## $ SCH_NAME                   &amp;lt;chr&amp;gt; &amp;quot;Adair County High School&amp;quot;, &amp;quot;Adair ...
+## $ SCH_CD                     &amp;lt;chr&amp;gt; &amp;quot;001010&amp;quot;, &amp;quot;001010&amp;quot;, &amp;quot;001010&amp;quot;, &amp;quot;0010...
+## $ SCH_TYPE                   &amp;lt;chr&amp;gt; &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;, &amp;quot;A1&amp;quot;,...
+## $ STATE_SCH_ID               &amp;lt;chr&amp;gt; &amp;quot;001001010&amp;quot;, &amp;quot;001001010&amp;quot;, &amp;quot;00100101...
+## $ NCESID                     &amp;lt;dbl&amp;gt; 2.10003e+11, 2.10003e+11, 2.10003e+...
+## $ CATEGORY                   &amp;lt;chr&amp;gt; &amp;quot;Accountability&amp;quot;, &amp;quot;Accountability&amp;quot;,...
+## $ TEST_TYPE                  &amp;lt;chr&amp;gt; &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, &amp;quot;CCR&amp;quot;, ...
+## $ DISAGG_ORDER               &amp;lt;int&amp;gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1...
+## $ DISAGG_LABEL               &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &amp;lt;chr&amp;gt; &amp;quot;196&amp;quot;, &amp;quot;106&amp;quot;, &amp;quot;90&amp;quot;, &amp;quot;180&amp;quot;, &amp;quot;5*&amp;quot;, &amp;quot;8...
+## $ COLLEGE_READY              &amp;lt;int&amp;gt; 112, 54, 58, 106, NA, NA, NA, NA, N...
+## $ CAREER_READY_ACADEMIC      &amp;lt;int&amp;gt; 134, 70, 64, 124, NA, NA, NA, NA, N...
+## $ CAREER_READY_TECHNICAL     &amp;lt;int&amp;gt; 79, 44, 35, 77, NA, NA, NA, NA, NA,...
+## $ CAREER_READY_TOTAL         &amp;lt;int&amp;gt; 72, 40, 32, 72, NA, NA, NA, NA, NA,...
+## $ NBR_CCR_REGULAR            &amp;lt;int&amp;gt; 131, 65, 66, 125, NA, NA, NA, NA, N...
+## $ PCT_CCR_NO_BONUS           &amp;lt;dbl&amp;gt; 66.8, 61.3, 73.3, 69.4, NA, NA, NA,...
+## $ PCT_CCR_WITH_BONUS         &amp;lt;dbl&amp;gt; 80.9, 75.5, 87.2, 84.4, NA, NA, NA,...
+## $ COOP                       &amp;lt;chr&amp;gt; &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;, &amp;quot;GRREC&amp;quot;,...
+## $ COOP_CODE                  &amp;lt;int&amp;gt; 902, 902, 902, 902, 902, 902, 902, ...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Unique values in each column
+map(ccr_data %&amp;gt;% filter(DIST_NAME == &amp;#39;Jefferson County&amp;#39;), function(i) length(unique(i)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## $SCH_YEAR
+## [1] 1
+## 
+## $CNTYNO
+## [1] 1
+## 
+## $CNTYNAME
+## [1] 1
+## 
+## $DIST_NUMBER
+## [1] 1
+## 
+## $DIST_NAME
+## [1] 1
+## 
+## $SCH_NUMBER
+## [1] 22
+## 
+## $SCH_NAME
+## [1] 22
+## 
+## $SCH_CD
+## [1] 22
+## 
+## $SCH_TYPE
+## [1] 2
+## 
+## $STATE_SCH_ID
+## [1] 22
+## 
+## $NCESID
+## [1] 22
+## 
+## $CATEGORY
+## [1] 1
+## 
+## $TEST_TYPE
+## [1] 1
+## 
+## $DISAGG_ORDER
+## [1] 17
+## 
+## $DISAGG_LABEL
+## [1] 17
+## 
+## $NBR_GRADUATES_WITH_DIPLOMA
+## [1] 149
+## 
+## $COLLEGE_READY
+## [1] 116
+## 
+## $CAREER_READY_ACADEMIC
+## [1] 61
+## 
+## $CAREER_READY_TECHNICAL
+## [1] 81
+## 
+## $CAREER_READY_TOTAL
+## [1] 48
+## 
+## $NBR_CCR_REGULAR
+## [1] 122
+## 
+## $PCT_CCR_NO_BONUS
+## [1] 169
+## 
+## $PCT_CCR_WITH_BONUS
+## [1] 168
+## 
+## $COOP
+## [1] 1
+## 
+## $COOP_CODE
+## [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Don&amp;#39;t forget the glossary!
+# http://applications.education.ky.gov/SRC/Glossary.aspx
+
+## Looking at the data by county, selecting just the columns we are interested in
+
+ccr_data_s &amp;lt;- ccr_data %&amp;gt;% 
+  filter(DIST_NAME == &amp;#39;Jefferson County&amp;#39;) %&amp;gt;% 
+  select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_s)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &amp;lt;int&amp;gt; 20152016, 20152016, 20152016, 20152...
+## $ SCH_NAME                   &amp;lt;chr&amp;gt; &amp;quot;Atherton High School&amp;quot;, &amp;quot;Atherton H...
+## $ DISAGG_LABEL               &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &amp;lt;chr&amp;gt; &amp;quot;264&amp;quot;, &amp;quot;114&amp;quot;, &amp;quot;150&amp;quot;, &amp;quot;175&amp;quot;, &amp;quot;59&amp;quot;, &amp;quot;...
+## $ NBR_CCR_REGULAR            &amp;lt;int&amp;gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &amp;lt;dbl&amp;gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wtf-just-happened&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;WTF JUST HAPPENED&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The first thing we did was to load the &lt;code&gt;tidyverse&lt;/code&gt;. This gives use access to many of the most powerful data analysis packages.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dplyr&lt;/code&gt; is a “grammar of data manipulation” and was written by Hadley Wickham.
+&lt;ul&gt;
+&lt;li&gt;Four idioms in &lt;code&gt;dplyr&lt;/code&gt; are the most important: &lt;code&gt;select&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, &lt;code&gt;mutate&lt;/code&gt;, and &lt;code&gt;summarize&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;We’ve technically already used both &lt;code&gt;readr&lt;/code&gt; with &lt;code&gt;read_csv&lt;/code&gt; and also &lt;code&gt;tibble&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter&lt;/code&gt; - a subsetting function. Takes column names and equivilencies as arguments.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;select&lt;/code&gt; - a function for picking columns.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;select&lt;/code&gt; has a lot of helper functions, and negative values can be used.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&amp;gt;%&lt;/code&gt; - the pipe. Linux people can guess what this means.
+&lt;ul&gt;
+&lt;li&gt;Originally from the &lt;code&gt;magrittr&lt;/code&gt; package. I have no idea what &lt;code&gt;magrittr&lt;/code&gt; was supposed to do, but it gave use the pipe.&lt;/li&gt;
+&lt;li&gt;When you see this, the data on the LHS becomes the first argument to the function on the RHS&lt;/li&gt;
+&lt;li&gt;Once you get the hang of &lt;code&gt;%&amp;gt;%&lt;/code&gt;, your life will change for the better&lt;/li&gt;
+&lt;li&gt;A massive amount of R base functions have been rewritten so the data is the first argument.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;BONUS&lt;/em&gt; &lt;code&gt;map&lt;/code&gt; is from &lt;code&gt;purrr&lt;/code&gt;. It is a unique way to do iteration in R. If we have time, I’ll talk about it at the end.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;okay-so-what-now&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Okay, So What Now?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Are there any &lt;code&gt;type&lt;/code&gt; issues?&lt;/li&gt;
+&lt;li&gt;Let’s explore our &lt;em&gt;narrow&lt;/em&gt; columns to see if there are any inconsistencies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ccr_data_s %&amp;gt;% glimpse()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &amp;lt;int&amp;gt; 20152016, 20152016, 20152016, 20152...
+## $ SCH_NAME                   &amp;lt;chr&amp;gt; &amp;quot;Atherton High School&amp;quot;, &amp;quot;Atherton H...
+## $ DISAGG_LABEL               &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &amp;lt;chr&amp;gt; &amp;quot;264&amp;quot;, &amp;quot;114&amp;quot;, &amp;quot;150&amp;quot;, &amp;quot;175&amp;quot;, &amp;quot;59&amp;quot;, &amp;quot;...
+## $ NBR_CCR_REGULAR            &amp;lt;int&amp;gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &amp;lt;dbl&amp;gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ccr_data_s$SCH_NAME %&amp;gt;% unique() %&amp;gt;% sort()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;---District Total---&amp;quot;           &amp;quot;Atherton High School&amp;quot;          
+##  [3] &amp;quot;Ballard High&amp;quot;                   &amp;quot;Brown School&amp;quot;                  
+##  [5] &amp;quot;Butler Traditional High School&amp;quot; &amp;quot;Central High School&amp;quot;           
+##  [7] &amp;quot;Doss High&amp;quot;                      &amp;quot;duPont Manual High&amp;quot;            
+##  [9] &amp;quot;Eastern High&amp;quot;                   &amp;quot;Fairdale High School&amp;quot;          
+## [11] &amp;quot;Fern Creek High School&amp;quot;         &amp;quot;Iroquois High&amp;quot;                 
+## [13] &amp;quot;Jeffersontown High School&amp;quot;      &amp;quot;Louisville Male High School&amp;quot;   
+## [15] &amp;quot;Moore Traditional School&amp;quot;       &amp;quot;Pleasure Ridge Park High&amp;quot;      
+## [17] &amp;quot;Seneca High&amp;quot;                    &amp;quot;Southern High School&amp;quot;          
+## [19] &amp;quot;The Academy @ Shawnee&amp;quot;          &amp;quot;Valley High School&amp;quot;            
+## [21] &amp;quot;Waggener High School&amp;quot;           &amp;quot;Western High School&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Fix up some columns!
+
+library(stringr)
+ccr_data_t &amp;lt;- ccr_data_s %&amp;gt;% 
+  mutate(
+    SCH_NAME = str_replace_all(SCH_NAME, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% trimws(),
+    SCH_YEAR = 2016,
+    NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric(),
+    NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric()
+  )
+
+glimpse(ccr_data_t)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &amp;lt;dbl&amp;gt; 2016, 2016, 2016, 2016, 2016, 2016,...
+## $ SCH_NAME                   &amp;lt;chr&amp;gt; &amp;quot;Atherton High School&amp;quot;, &amp;quot;Atherton H...
+## $ DISAGG_LABEL               &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &amp;lt;dbl&amp;gt; 264, 114, 150, 175, 59, 16, 9, 1, N...
+## $ NBR_CCR_REGULAR            &amp;lt;dbl&amp;gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &amp;lt;dbl&amp;gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mutate-and-stringr&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mutate and &lt;code&gt;stringr&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Of all the &lt;code&gt;dplyr&lt;/code&gt; functions, &lt;code&gt;mutate&lt;/code&gt; is my favorite&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mutate&lt;/code&gt; takes a column, applies a transformation to it, and either saves it back into the old column or creates a new column.
+&lt;ul&gt;
+&lt;li&gt;Great for using iterators like the &lt;code&gt;apply&lt;/code&gt; family or the &lt;code&gt;purrr::map&lt;/code&gt; family.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;stringr&lt;/code&gt; is another &lt;code&gt;tidyverse&lt;/code&gt; package, but it needs to be loaded separately.
+&lt;ul&gt;
+&lt;li&gt;There are a lot of basic string functions built into base R, but they don’t have the data as the first argument, and can’t be used with the &lt;code&gt;%&amp;gt;%&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;It’s PROBABLY a good idea to learn about the base R functions, but IMO, learning &lt;code&gt;stringr&lt;/code&gt; is better.&lt;/li&gt;
+&lt;li&gt;There are other, more powerful string function in &lt;code&gt;stringr&lt;/code&gt; not available in base R.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;We also used &lt;code&gt;as.numeric()&lt;/code&gt; which is a casting function. BE CAREFUL with these.
+&lt;ul&gt;
+&lt;li&gt;If we hadn’t pulled out the extra punctuation first, it would have cast the non-numeric data to &lt;code&gt;NA&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;narrow-it-down&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Narrow It Down&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We’ve still got &lt;em&gt;Wide&lt;/em&gt; data. Let’s narrow it up!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ccr_data_n &amp;lt;- ccr_data_t %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 1,122
+## Variables: 5
+## $ SCH_YEAR     &amp;lt;dbl&amp;gt; 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2...
+## $ SCH_NAME     &amp;lt;chr&amp;gt; &amp;quot;Atherton High School&amp;quot;, &amp;quot;Atherton High School&amp;quot;, &amp;quot;...
+## $ DISAGG_LABEL &amp;lt;chr&amp;gt; &amp;quot;All Students&amp;quot;, &amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;White (Non-His...
+## $ Level        &amp;lt;chr&amp;gt; &amp;quot;NBR_GRADUATES_WITH_DIPLOMA&amp;quot;, &amp;quot;NBR_GRADUATES_WITH...
+## $ value        &amp;lt;dbl&amp;gt; 264, 114, 150, 175, 59, 16, 9, 1, NA, 4, NA, 5, 1...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gather-or-the-most-confusing-thing-in-the-world.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;code&gt;Gather&lt;/code&gt;, or, the most confusing thing in the world.&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Back in the day, many people used a package named &lt;code&gt;reshape2&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;Many people still use it. The best part was &lt;code&gt;reshape2::melt&lt;/code&gt;, which made data narrow.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tidyr::gather&lt;/code&gt; is, in my mind, a better solution. It’s part of the &lt;code&gt;tidyverse&lt;/code&gt; and make things more explicit.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gather&lt;/code&gt; takes a &lt;em&gt;key&lt;/em&gt; and a &lt;em&gt;value&lt;/em&gt;, which are NEW columns that will be created.&lt;/li&gt;
+&lt;li&gt;Then, you pass it the columns you want to &lt;em&gt;gather&lt;/em&gt; and those get placed into the &lt;em&gt;key&lt;/em&gt; column
+&lt;ul&gt;
+&lt;li&gt;I told you this was confusing.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;There is a partner to &lt;code&gt;gather&lt;/code&gt;, &lt;code&gt;spread&lt;/code&gt;, which takes narrow data and makes it wide.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;next-up-listen-for-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Next Up, Listen for Tips!&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Kris Stevens gave me this data, and told me that many of the “District Total” figures weren’t correct.&lt;/li&gt;
+&lt;li&gt;Let’s fix them up!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ccr_data_n %&amp;gt;% 
+    filter(Level == &amp;#39;NBR_GRADUATES_WITH_DIPLOMA&amp;#39;) %&amp;gt;% 
+    group_by(DISAGG_LABEL) %&amp;gt;% 
+    summarize(&amp;#39;NBR_GRADUATES_WITH_DIPLOMA&amp;#39; = sum(value, na.rm = T)) %&amp;gt;% 
+    left_join(
+      ccr_data_n %&amp;gt;% 
+        filter(Level == &amp;#39;NBR_CCR_REGULAR&amp;#39;) %&amp;gt;% 
+        group_by(DISAGG_LABEL) %&amp;gt;% 
+        summarize(&amp;#39;NBR_CCR_REGULAR&amp;#39; = sum(value, na.rm = T))
+    ) %&amp;gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = &amp;#39;District Total&amp;#39;) %&amp;gt;% 
+    bind_rows(ccr_data_n) %&amp;gt;% View()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;woof-that-code-is-ugly.-is-there-a-better-way&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Woof, that code is ugly. Is there a better way?&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;aggregate_level &amp;lt;- function(df, col_head){
+  df %&amp;gt;% 
+    filter(Level == col_head) %&amp;gt;% 
+    group_by(DISAGG_LABEL) %&amp;gt;% 
+    summarize(new_col = sum(value, na.rm = T)) %&amp;gt;% 
+    rename_(.dots = setNames(&amp;#39;new_col&amp;#39;, eval(col_head)))
+}
+
+ccr_tidy &amp;lt;- aggregate_level(ccr_data_n, &amp;#39;NBR_GRADUATES_WITH_DIPLOMA&amp;#39;) %&amp;gt;% 
+  left_join(aggregate_level(ccr_data_n, &amp;#39;NBR_CCR_REGULAR&amp;#39;)) %&amp;gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = &amp;#39;District Total&amp;#39;) %&amp;gt;% 
+    bind_rows(ccr_data_n)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;group_by-summarize-joins-binds-nse-and-functional-programming&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;code&gt;group_by&lt;/code&gt;, &lt;code&gt;summarize&lt;/code&gt;, joins, binds, NSE, and functional programming&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;WHAT A LIST&lt;/li&gt;
+&lt;li&gt;If you’ve used SQL, you probably understand &lt;code&gt;group_by&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;When you group a column and then run an aggregation function, it aggregates PER GROUP.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;summarize&lt;/code&gt; is one of those aggregation functions.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;summarize&lt;/code&gt; is kind of like mutate, but instead of creating a new column of the same length as the df, it summarizes the data.&lt;/li&gt;
+&lt;li&gt;There are places where &lt;code&gt;summarize&lt;/code&gt; is useful without &lt;code&gt;group_by&lt;/code&gt;, but not many.&lt;/li&gt;
+&lt;li&gt;The way we used &lt;code&gt;summarize&lt;/code&gt; above, we got a number representing the sum of &lt;code&gt;value&lt;/code&gt; by each &lt;code&gt;DISAGG_LABEL&lt;/code&gt; .
+&lt;ul&gt;
+&lt;li&gt;We could have switched the &lt;code&gt;group_by&lt;/code&gt; to &lt;code&gt;SCH_NAME&lt;/code&gt; and it would have given us the sum of &lt;code&gt;value&lt;/code&gt; by each school.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;It’s technically &lt;code&gt;summarise&lt;/code&gt;, but this is America, dammit.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Joins are also something SQL users will be familiar with.
+&lt;ul&gt;
+&lt;li&gt;Types: &lt;code&gt;left_join&lt;/code&gt;, &lt;code&gt;inner_join&lt;/code&gt;, &lt;code&gt;right_join&lt;/code&gt;, &lt;code&gt;full_join&lt;/code&gt;, &lt;code&gt;semi_join&lt;/code&gt;, and &lt;code&gt;anti_join&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;All types take two data frames, and typically a &lt;code&gt;by&lt;/code&gt; argument, and sometimes a &lt;code&gt;suffix&lt;/code&gt; argument.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;by&lt;/code&gt; takes a &lt;em&gt;vector&lt;/em&gt; that looks like &lt;code&gt;c(&#39;lhs&#39; = &#39;rhs&#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If there are column names in common with LHS and RHS, the default suffix is ‘.x’ and ‘.y’, but you can override those.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;We are using &lt;code&gt;left_join&lt;/code&gt;:
+&lt;ul&gt;
+&lt;li&gt;“return all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.”&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The R documentation for joins is good if you aren’t clear about which of these. &lt;code&gt;anti_join&lt;/code&gt; and &lt;code&gt;semi_join&lt;/code&gt; are rare but cool.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Binds are way to bind together data frames. They stack on top of each other.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bind_rows&lt;/code&gt; and &lt;code&gt;bind_cols&lt;/code&gt; are the &lt;code&gt;dplyr&lt;/code&gt; way to do things.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rbind&lt;/code&gt; and &lt;code&gt;cbind&lt;/code&gt; are base R.&lt;/li&gt;
+&lt;li&gt;As usualy, the tidyverse way is safer and more powerful.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Non-standard evaluation
+&lt;ul&gt;
+&lt;li&gt;If you’ve got keen eyes, you’ve noticed that the arguments to the &lt;code&gt;dplyr&lt;/code&gt; functions are never strings – they are bare and unquoted.&lt;/li&gt;
+&lt;li&gt;This form of evaluation is called “standard evaluation”, and it’s not great for programming. (Fine for analysis though).&lt;/li&gt;
+&lt;li&gt;“Non-Standard Evaluation” is also present in &lt;code&gt;dplyr&lt;/code&gt;. It’s all the functions with an underscore after them. For example &lt;code&gt;rename_&lt;/code&gt; (rename is another way to do &lt;code&gt;select&lt;/code&gt;)
+&lt;ul&gt;
+&lt;li&gt;Probably don’t worry about knowing how to do this, but know it’s there.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Functional Programming
+&lt;ul&gt;
+&lt;li&gt;This is the heart of R – building functions you can call later.&lt;/li&gt;
+&lt;li&gt;Everything we’ve “called” so far is technically a function. You can build your own!&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;function(x,y){}&lt;/code&gt; would create a function that you could call with two inputs.&lt;/li&gt;
+&lt;li&gt;Most of the functions I write are anonymous, but not always!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;okay-so-what-next&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;OKAY SO WHAT NEXT&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We’ve been working with one csv’s worth of data so far, but the BoE makes several years available. Let’s combine them!&lt;/li&gt;
+&lt;li&gt;To do that, we will put all the code we’ve made so far into a function, and then bind all the data together using that function.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_ccr &amp;lt;- function(df, county){
+  tidy_df &amp;lt;- df %&amp;gt;% 
+    filter(DIST_NAME == county) %&amp;gt;% 
+    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(      # First Change
+      SCH_YEAR = case_when(SCH_YEAR == 20152016 ~ 2016L,
+          SCH_YEAR == 20142015 ~ 2015L,
+          SCH_YEAR == 20132014 ~ 2014L,
+          SCH_YEAR == 20122013 ~ 2013L,
+          SCH_YEAR == 20112012 ~ 2012L
+        ) %&amp;gt;% ordered(),
+      SCH_NAME = str_replace_all(SCH_NAME, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% trimws(),
+      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric(),
+      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric()
+    ) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+  
+  aggregate_level(tidy_df, &amp;#39;NBR_GRADUATES_WITH_DIPLOMA&amp;#39;) %&amp;gt;% 
+    left_join(aggregate_level(tidy_df, &amp;#39;NBR_CCR_REGULAR&amp;#39;)) %&amp;gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
+           SCH_NAME = &amp;#39;District Total&amp;#39;) %&amp;gt;% 
+    bind_rows(tidy_df)
+}
+
+bind_data &amp;lt;- function(county){
+  bind_rows(
+    read_csv(&amp;#39;./EDA_Munging_data/1516.csv&amp;#39;) %&amp;gt;% tidy_ccr(county),
+    read_csv(&amp;#39;./EDA_Munging_data/1415.csv&amp;#39;) %&amp;gt;% tidy_ccr(county),
+    read_csv(&amp;#39;./EDA_Munging_data/1314.csv&amp;#39;) %&amp;gt;% tidy_ccr(county),
+    read_csv(&amp;#39;./EDA_Munging_data/1213.csv&amp;#39;) %&amp;gt;% tidy_ccr(county),
+    read_csv(&amp;#39;./EDA_Munging_data/1112.csv&amp;#39;) %&amp;gt;% tidy_ccr(county)
+  )
+}
+
+jefferson_data &amp;lt;- bind_data(&amp;#39;Jefferson County&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;now-you-get-it&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Now You Get It!&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;You get it, right?
+&lt;ul&gt;
+&lt;li&gt;What does the &lt;code&gt;bind_data&lt;/code&gt; function do? Can you explain it?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;I also made a change to the &lt;code&gt;SCH_YEAR&lt;/code&gt; column, so that it work correctly.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;case_when&lt;/code&gt; is a sexy way to do &lt;code&gt;ifelse&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;I also used another &lt;code&gt;map&lt;/code&gt; function.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Okay, so let’s take a look to make sure things aren’t too weird.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glimpse(jefferson_data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Observations: 5,865
+## Variables: 5
+## $ DISAGG_LABEL &amp;lt;chr&amp;gt; &amp;quot;African American&amp;quot;, &amp;quot;All Students&amp;quot;, &amp;quot;American Ind...
+## $ Level        &amp;lt;chr&amp;gt; &amp;quot;NBR_GRADUATES_WITH_DIPLOMA&amp;quot;, &amp;quot;NBR_GRADUATES_WITH...
+## $ value        &amp;lt;dbl&amp;gt; 4135, 11958, 12, 493, 112, 333, 445, 401, 6276, 6...
+## $ SCH_YEAR     &amp;lt;chr&amp;gt; &amp;quot;2016&amp;quot;, &amp;quot;2016&amp;quot;, &amp;quot;2016&amp;quot;, &amp;quot;2016&amp;quot;, &amp;quot;2016&amp;quot;, &amp;quot;2016&amp;quot;, &amp;quot;...
+## $ SCH_NAME     &amp;lt;chr&amp;gt; &amp;quot;District Total&amp;quot;, &amp;quot;District Total&amp;quot;, &amp;quot;District Tot...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jefferson_data$DISAGG_LABEL %&amp;gt;% unique()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;African American&amp;quot;                             
+##  [2] &amp;quot;All Students&amp;quot;                                 
+##  [3] &amp;quot;American Indian or Alaska Native&amp;quot;             
+##  [4] &amp;quot;Asian&amp;quot;                                        
+##  [5] &amp;quot;Disability-Alternate Only&amp;quot;                    
+##  [6] &amp;quot;Disability-With IEP (not including Alternate)&amp;quot;
+##  [7] &amp;quot;Disability-With IEP (Total)&amp;quot;                  
+##  [8] &amp;quot;English Learners&amp;quot;                             
+##  [9] &amp;quot;Female&amp;quot;                                       
+## [10] &amp;quot;Free/Reduced-Price Meals&amp;quot;                     
+## [11] &amp;quot;Gap Group (non-duplicated)&amp;quot;                   
+## [12] &amp;quot;Hispanic&amp;quot;                                     
+## [13] &amp;quot;Male&amp;quot;                                         
+## [14] &amp;quot;Migrant&amp;quot;                                      
+## [15] &amp;quot;Native Hawaiian or Other Pacific Islander&amp;quot;    
+## [16] &amp;quot;Two or more races&amp;quot;                            
+## [17] &amp;quot;White (Non-Hispanic)&amp;quot;                         
+## [18] &amp;quot;Limited English Proficiency&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jefferson_data$SCH_NAME %&amp;gt;% unique()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;District Total&amp;quot;                 &amp;quot;Atherton High School&amp;quot;          
+##  [3] &amp;quot;Ballard High&amp;quot;                   &amp;quot;Brown School&amp;quot;                  
+##  [5] &amp;quot;Butler Traditional High School&amp;quot; &amp;quot;Central High School&amp;quot;           
+##  [7] &amp;quot;Doss High&amp;quot;                      &amp;quot;Eastern High&amp;quot;                  
+##  [9] &amp;quot;Fairdale High School&amp;quot;           &amp;quot;Fern Creek High School&amp;quot;        
+## [11] &amp;quot;Iroquois High&amp;quot;                  &amp;quot;Jeffersontown High School&amp;quot;     
+## [13] &amp;quot;Louisville Male High School&amp;quot;    &amp;quot;Moore Traditional School&amp;quot;      
+## [15] &amp;quot;Pleasure Ridge Park High&amp;quot;       &amp;quot;Seneca High&amp;quot;                   
+## [17] &amp;quot;Southern High School&amp;quot;           &amp;quot;The Academy  Shawnee&amp;quot;          
+## [19] &amp;quot;Valley High School&amp;quot;             &amp;quot;Waggener High School&amp;quot;          
+## [21] &amp;quot;Western High School&amp;quot;            &amp;quot;duPont Manual High&amp;quot;            
+## [23] &amp;quot;Dupont Manual High&amp;quot;             &amp;quot;Fern Creek Traditional High&amp;quot;   
+## [25] &amp;quot;Fairdale High School MCA&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_ccr &amp;lt;- function(df, county){
+  tidy_df &amp;lt;- df %&amp;gt;% 
+    filter(DIST_NAME == county) %&amp;gt;% 
+    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(
+      SCH_YEAR = case_when(
+          SCH_YEAR == 20152016 ~ 2016L,
+          SCH_YEAR == 20142015 ~ 2015L,
+          SCH_YEAR == 20132014 ~ 2014L,
+          SCH_YEAR == 20122013 ~ 2013L,
+          SCH_YEAR == 20112012 ~ 2012L
+        ) %&amp;gt;% ordered(),
+      SCH_NAME = map_chr(SCH_NAME, function(i){
+        if(i == &amp;#39;Dupont Manual High&amp;#39;) &amp;#39;duPont Manual High&amp;#39;
+        else if(i == &amp;#39;Fern Creek Traditional High&amp;#39;) &amp;#39;Fern Creek High School&amp;#39;
+        else if(i == &amp;#39;Fairdale High School MCA&amp;#39;) &amp;#39;Fairdale High School&amp;#39;
+        else str_replace_all(i, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% trimws()
+      }),
+      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric(),
+      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &amp;#39;[[:punct:]]&amp;#39;,&amp;#39;&amp;#39;) %&amp;gt;% as.numeric()
+    ) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+  
+  aggregate_level(tidy_df, &amp;#39;NBR_GRADUATES_WITH_DIPLOMA&amp;#39;) %&amp;gt;% 
+    left_join(aggregate_level(tidy_df, &amp;#39;NBR_CCR_REGULAR&amp;#39;)) %&amp;gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&amp;gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&amp;gt;% 
+    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
+           SCH_NAME = &amp;#39;District Total&amp;#39;) %&amp;gt;% 
+    bind_rows(tidy_df)
+}
+
+jefferson_data &amp;lt;- bind_data(&amp;#39;Jefferson County&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;fixing-the-weirdness&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Fixing the Weirdness&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;SCH_NAME&lt;/code&gt; field was not consistent across the data, so we fixed it.
+&lt;ul&gt;
+&lt;li&gt;We used an iterator, which is a little more advaced than we are going today (probably)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;now-weve-got-tidy-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;NOW WE’VE GOT TIDY DATA!!!!&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Let’s do some basic visualizations!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;facet_ccr &amp;lt;- function(df, lev){
+  ggplot(df %&amp;gt;% 
+         filter(SCH_NAME != &amp;#39;District Total&amp;#39;,
+                Level == &amp;#39;PCT_CCR_NO_BONUS&amp;#39;, 
+                DISAGG_LABEL == lev), 
+       aes(x = SCH_YEAR, y = value, group = 1)) + 
+  geom_smooth() +
+  geom_point() +
+  ggtitle(&amp;#39;Percent College Career Ready by School, 2012 - 2016&amp;#39;,
+          subtitle = lev) +
+  facet_wrap(~SCH_NAME) +
+  theme_minimal()
+}
+
+j&amp;lt;- bind_data(&amp;#39;Jefferson County&amp;#39;)
+f &amp;lt;- bind_data(&amp;#39;Fayette County&amp;#39;)
+
+facet_ccr(j, &amp;#39;All Students&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../post/EDA_Munging_files/figure-html/Viz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;facet_ccr(f, &amp;#39;All Students&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../post/EDA_Munging_files/figure-html/Viz-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>
