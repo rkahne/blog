@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="EDA and Basic Data Munging with Public Data" />
+<meta property="og:description" content="What are we about to do?Learn the most important idioms for data munging in RApply them to an open data exampleBy the end, I hope you can use these skills to repeat this process with data you findWhat Data Are We Using?Kentucky Department of Education College and Career Readiness DataEasily Found on their websiteStep 1: Load Up Tidyverse and Read In Datalibrary(tidyverse)ccr_data &lt;- read_csv(&#39;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2017/07/28/eda-and-basic-data-munging-with-public-data/" />
+
+
+
+<meta property="article:published_time" content="2017-07-28T13:14:46-04:00"/>
+<meta property="article:modified_time" content="2017-07-28T13:14:46-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="EDA and Basic Data Munging with Public Data"/>
+<meta name="twitter:description" content="What are we about to do?Learn the most important idioms for data munging in RApply them to an open data exampleBy the end, I hope you can use these skills to repeat this process with data you findWhat Data Are We Using?Kentucky Department of Education College and Career Readiness DataEasily Found on their websiteStep 1: Load Up Tidyverse and Read In Datalibrary(tidyverse)ccr_data &lt;- read_csv(&#39;."/>
+<meta name="generator" content="Hugo 0.26" />
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "EDA and Basic Data Munging with Public Data",
+  "url": "/2017/07/28/eda-and-basic-data-munging-with-public-data/",
+  "wordCount": "2362",
+  "datePublished": "2017-07-28T13:14:46-04:00",
+  "dateModified": "2017-07-28T13:14:46-04:00",
+  "author": {
+    "@type": "Person",
+    "name": "Robert Kahne"
+  },
+  "keywords": "Learning,R,Open Data"
+}
+</script>
+
+
+
+    <link rel="canonical" href="../../../../2017/07/28/eda-and-basic-data-munging-with-public-data/">
+
+    <title>EDA and Basic Data Munging with Public Data | Blog - Robert Kahne</title>
+
+    <!-- combined, minified CSS -->
+    <link href="../../../../css/style.css" rel="stylesheet" integrity="sha384-j3n8sYdzztDYtVc80KiiuOXoCg5Bjz0zYyLGzDMW8RbfA0u5djbF0GO3bVOPoLyN" crossorigin="anonymous">
+
+    
+
+    
+
+    
+
+    
+
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="../../../../">Home</a>
+          
+          
+          <a class="nav-link" href="../../../../about/">About</a>
+          
+          
+        </nav>
+      </div>
+    </div>
+
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title"><a href="../../../../" rel="home">Blog - Robert Kahne</a></h1>
+        <p class="lead blog-description">A website built through Hugo and blogdown.</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title"><a href="../../../../2017/07/28/eda-and-basic-data-munging-with-public-data/">EDA and Basic Data Munging with Public Data</a></h2>
+    <p class="blog-post-meta"><time datetime="2017-07-28T13:14:46-04:00">Fri Jul 28, 2017</time> by Robert Kahne in 
+
+<i class="fa fa-tag" aria-hidden="true"></i>&nbsp;<a href="../../../../tags/learning" rel="tag">Learning</a>, <a href="../../../../tags/r" rel="tag">R</a>, <a href="../../../../tags/open-data" rel="tag">Open Data</a>
+
+</p>
+  </header>
+  <div id="what-are-we-about-to-do" class="section level2">
+<h2>What are we about to do?</h2>
+<ul>
+<li>Learn the most important idioms for data munging in R</li>
+<li>Apply them to an open data example</li>
+<li>By the end, I hope you can use these skills to repeat this process with data you find</li>
+</ul>
+</div>
+<div id="what-data-are-we-using" class="section level2">
+<h2>What Data Are We Using?</h2>
+<ul>
+<li>Kentucky Department of Education College and Career Readiness Data</li>
+<li>Easily Found on their <a href="http://applications.education.ky.gov/SRC/DataSets.aspx">website</a></li>
+</ul>
+</div>
+<div id="step-1-load-up-tidyverse-and-read-in-data" class="section level2">
+<h2>Step 1: Load Up Tidyverse and Read In Data</h2>
+<pre class="r"><code>library(tidyverse)
+
+ccr_data &lt;- read_csv(&#39;./EDA_Munging_data/1516.csv&#39;)
+
+glimpse(ccr_data)</code></pre>
+<pre><code>## Observations: 6,902
+## Variables: 25
+## $ SCH_YEAR                   &lt;int&gt; 20152016, 20152016, 20152016, 20152...
+## $ CNTYNO                     &lt;chr&gt; &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, ...
+## $ CNTYNAME                   &lt;chr&gt; &quot;ADAIR&quot;, &quot;ADAIR&quot;, &quot;ADAIR&quot;, &quot;ADAIR&quot;,...
+## $ DIST_NUMBER                &lt;chr&gt; &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, ...
+## $ DIST_NAME                  &lt;chr&gt; &quot;Adair County&quot;, &quot;Adair County&quot;, &quot;Ad...
+## $ SCH_NUMBER                 &lt;chr&gt; &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, ...
+## $ SCH_NAME                   &lt;chr&gt; &quot;Adair County High School&quot;, &quot;Adair ...
+## $ SCH_CD                     &lt;chr&gt; &quot;001010&quot;, &quot;001010&quot;, &quot;001010&quot;, &quot;0010...
+## $ SCH_TYPE                   &lt;chr&gt; &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;,...
+## $ STATE_SCH_ID               &lt;chr&gt; &quot;001001010&quot;, &quot;001001010&quot;, &quot;00100101...
+## $ NCESID                     &lt;dbl&gt; 2.10003e+11, 2.10003e+11, 2.10003e+...
+## $ CATEGORY                   &lt;chr&gt; &quot;Accountability&quot;, &quot;Accountability&quot;,...
+## $ TEST_TYPE                  &lt;chr&gt; &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, ...
+## $ DISAGG_ORDER               &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1...
+## $ DISAGG_LABEL               &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &lt;chr&gt; &quot;196&quot;, &quot;106&quot;, &quot;90&quot;, &quot;180&quot;, &quot;5*&quot;, &quot;8...
+## $ COLLEGE_READY              &lt;int&gt; 112, 54, 58, 106, NA, NA, NA, NA, N...
+## $ CAREER_READY_ACADEMIC      &lt;int&gt; 134, 70, 64, 124, NA, NA, NA, NA, N...
+## $ CAREER_READY_TECHNICAL     &lt;int&gt; 79, 44, 35, 77, NA, NA, NA, NA, NA,...
+## $ CAREER_READY_TOTAL         &lt;int&gt; 72, 40, 32, 72, NA, NA, NA, NA, NA,...
+## $ NBR_CCR_REGULAR            &lt;int&gt; 131, 65, 66, 125, NA, NA, NA, NA, N...
+## $ PCT_CCR_NO_BONUS           &lt;dbl&gt; 66.8, 61.3, 73.3, 69.4, NA, NA, NA,...
+## $ PCT_CCR_WITH_BONUS         &lt;dbl&gt; 80.9, 75.5, 87.2, 84.4, NA, NA, NA,...
+## $ COOP                       &lt;chr&gt; &quot;GRREC&quot;, &quot;GRREC&quot;, &quot;GRREC&quot;, &quot;GRREC&quot;,...
+## $ COOP_CODE                  &lt;int&gt; 902, 902, 902, 902, 902, 902, 902, ...</code></pre>
+<ul>
+<li>What do we have here?
+<ul>
+<li>Is this data <em>Wide</em> or <em>Narrow</em>? (or both?!?!?!)
+<ul>
+<li>Wide data has columns for each variable</li>
+<li>Narrow data typically has a “variable” column and a “value” column and each variable is repeated multiple times.</li>
+<li>R very much prefers narrow data</li>
+</ul></li>
+<li>What columns seem important?
+<ul>
+<li>Does this data have multiple columns that represent the same value?</li>
+<li>Are there columns that don’t contain useful information?</li>
+<li>Consider your purpose for looking at the data, what story seems interesting and relevant?</li>
+</ul></li>
+</ul></li>
+</ul>
+<pre class="r"><code># Look at data
+glimpse(ccr_data)</code></pre>
+<pre><code>## Observations: 6,902
+## Variables: 25
+## $ SCH_YEAR                   &lt;int&gt; 20152016, 20152016, 20152016, 20152...
+## $ CNTYNO                     &lt;chr&gt; &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, ...
+## $ CNTYNAME                   &lt;chr&gt; &quot;ADAIR&quot;, &quot;ADAIR&quot;, &quot;ADAIR&quot;, &quot;ADAIR&quot;,...
+## $ DIST_NUMBER                &lt;chr&gt; &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, &quot;001&quot;, ...
+## $ DIST_NAME                  &lt;chr&gt; &quot;Adair County&quot;, &quot;Adair County&quot;, &quot;Ad...
+## $ SCH_NUMBER                 &lt;chr&gt; &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, &quot;010&quot;, ...
+## $ SCH_NAME                   &lt;chr&gt; &quot;Adair County High School&quot;, &quot;Adair ...
+## $ SCH_CD                     &lt;chr&gt; &quot;001010&quot;, &quot;001010&quot;, &quot;001010&quot;, &quot;0010...
+## $ SCH_TYPE                   &lt;chr&gt; &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;, &quot;A1&quot;,...
+## $ STATE_SCH_ID               &lt;chr&gt; &quot;001001010&quot;, &quot;001001010&quot;, &quot;00100101...
+## $ NCESID                     &lt;dbl&gt; 2.10003e+11, 2.10003e+11, 2.10003e+...
+## $ CATEGORY                   &lt;chr&gt; &quot;Accountability&quot;, &quot;Accountability&quot;,...
+## $ TEST_TYPE                  &lt;chr&gt; &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, &quot;CCR&quot;, ...
+## $ DISAGG_ORDER               &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1...
+## $ DISAGG_LABEL               &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &lt;chr&gt; &quot;196&quot;, &quot;106&quot;, &quot;90&quot;, &quot;180&quot;, &quot;5*&quot;, &quot;8...
+## $ COLLEGE_READY              &lt;int&gt; 112, 54, 58, 106, NA, NA, NA, NA, N...
+## $ CAREER_READY_ACADEMIC      &lt;int&gt; 134, 70, 64, 124, NA, NA, NA, NA, N...
+## $ CAREER_READY_TECHNICAL     &lt;int&gt; 79, 44, 35, 77, NA, NA, NA, NA, NA,...
+## $ CAREER_READY_TOTAL         &lt;int&gt; 72, 40, 32, 72, NA, NA, NA, NA, NA,...
+## $ NBR_CCR_REGULAR            &lt;int&gt; 131, 65, 66, 125, NA, NA, NA, NA, N...
+## $ PCT_CCR_NO_BONUS           &lt;dbl&gt; 66.8, 61.3, 73.3, 69.4, NA, NA, NA,...
+## $ PCT_CCR_WITH_BONUS         &lt;dbl&gt; 80.9, 75.5, 87.2, 84.4, NA, NA, NA,...
+## $ COOP                       &lt;chr&gt; &quot;GRREC&quot;, &quot;GRREC&quot;, &quot;GRREC&quot;, &quot;GRREC&quot;,...
+## $ COOP_CODE                  &lt;int&gt; 902, 902, 902, 902, 902, 902, 902, ...</code></pre>
+<pre class="r"><code># Unique values in each column
+map(ccr_data %&gt;% filter(DIST_NAME == &#39;Jefferson County&#39;), function(i) length(unique(i)))</code></pre>
+<pre><code>## $SCH_YEAR
+## [1] 1
+## 
+## $CNTYNO
+## [1] 1
+## 
+## $CNTYNAME
+## [1] 1
+## 
+## $DIST_NUMBER
+## [1] 1
+## 
+## $DIST_NAME
+## [1] 1
+## 
+## $SCH_NUMBER
+## [1] 22
+## 
+## $SCH_NAME
+## [1] 22
+## 
+## $SCH_CD
+## [1] 22
+## 
+## $SCH_TYPE
+## [1] 2
+## 
+## $STATE_SCH_ID
+## [1] 22
+## 
+## $NCESID
+## [1] 22
+## 
+## $CATEGORY
+## [1] 1
+## 
+## $TEST_TYPE
+## [1] 1
+## 
+## $DISAGG_ORDER
+## [1] 17
+## 
+## $DISAGG_LABEL
+## [1] 17
+## 
+## $NBR_GRADUATES_WITH_DIPLOMA
+## [1] 149
+## 
+## $COLLEGE_READY
+## [1] 116
+## 
+## $CAREER_READY_ACADEMIC
+## [1] 61
+## 
+## $CAREER_READY_TECHNICAL
+## [1] 81
+## 
+## $CAREER_READY_TOTAL
+## [1] 48
+## 
+## $NBR_CCR_REGULAR
+## [1] 122
+## 
+## $PCT_CCR_NO_BONUS
+## [1] 169
+## 
+## $PCT_CCR_WITH_BONUS
+## [1] 168
+## 
+## $COOP
+## [1] 1
+## 
+## $COOP_CODE
+## [1] 1</code></pre>
+<pre class="r"><code># Don&#39;t forget the glossary!
+# http://applications.education.ky.gov/SRC/Glossary.aspx
+
+## Looking at the data by county, selecting just the columns we are interested in
+
+ccr_data_s &lt;- ccr_data %&gt;% 
+  filter(DIST_NAME == &#39;Jefferson County&#39;) %&gt;% 
+  select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_s)</code></pre>
+<pre><code>## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &lt;int&gt; 20152016, 20152016, 20152016, 20152...
+## $ SCH_NAME                   &lt;chr&gt; &quot;Atherton High School&quot;, &quot;Atherton H...
+## $ DISAGG_LABEL               &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &lt;chr&gt; &quot;264&quot;, &quot;114&quot;, &quot;150&quot;, &quot;175&quot;, &quot;59&quot;, &quot;...
+## $ NBR_CCR_REGULAR            &lt;int&gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &lt;dbl&gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...</code></pre>
+</div>
+<div id="wtf-just-happened" class="section level2">
+<h2>WTF JUST HAPPENED</h2>
+<ul>
+<li>The first thing we did was to load the <code>tidyverse</code>. This gives use access to many of the most powerful data analysis packages.
+<ul>
+<li><code>dplyr</code> is a “grammar of data manipulation” and was written by Hadley Wickham.
+<ul>
+<li>Four idioms in <code>dplyr</code> are the most important: <code>select</code>, <code>filter</code>, <code>mutate</code>, and <code>summarize</code></li>
+</ul></li>
+<li>We’ve technically already used both <code>readr</code> with <code>read_csv</code> and also <code>tibble</code>.</li>
+</ul></li>
+<li><code>filter</code> - a subsetting function. Takes column names and equivilencies as arguments.</li>
+<li><code>select</code> - a function for picking columns.
+<ul>
+<li><code>select</code> has a lot of helper functions, and negative values can be used.</li>
+</ul></li>
+<li><code>%&gt;%</code> - the pipe. Linux people can guess what this means.
+<ul>
+<li>Originally from the <code>magrittr</code> package. I have no idea what <code>magrittr</code> was supposed to do, but it gave use the pipe.</li>
+<li>When you see this, the data on the LHS becomes the first argument to the function on the RHS</li>
+<li>Once you get the hang of <code>%&gt;%</code>, your life will change for the better</li>
+<li>A massive amount of R base functions have been rewritten so the data is the first argument.</li>
+</ul></li>
+<li><em>BONUS</em> <code>map</code> is from <code>purrr</code>. It is a unique way to do iteration in R. If we have time, I’ll talk about it at the end.</li>
+</ul>
+</div>
+<div id="okay-so-what-now" class="section level2">
+<h2>Okay, So What Now?</h2>
+<ul>
+<li>Are there any <code>type</code> issues?</li>
+<li>Let’s explore our <em>narrow</em> columns to see if there are any inconsistencies.</li>
+</ul>
+<pre class="r"><code>ccr_data_s %&gt;% glimpse()</code></pre>
+<pre><code>## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &lt;int&gt; 20152016, 20152016, 20152016, 20152...
+## $ SCH_NAME                   &lt;chr&gt; &quot;Atherton High School&quot;, &quot;Atherton H...
+## $ DISAGG_LABEL               &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &lt;chr&gt; &quot;264&quot;, &quot;114&quot;, &quot;150&quot;, &quot;175&quot;, &quot;59&quot;, &quot;...
+## $ NBR_CCR_REGULAR            &lt;int&gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &lt;dbl&gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...</code></pre>
+<pre class="r"><code>ccr_data_s$SCH_NAME %&gt;% unique() %&gt;% sort()</code></pre>
+<pre><code>##  [1] &quot;---District Total---&quot;           &quot;Atherton High School&quot;          
+##  [3] &quot;Ballard High&quot;                   &quot;Brown School&quot;                  
+##  [5] &quot;Butler Traditional High School&quot; &quot;Central High School&quot;           
+##  [7] &quot;Doss High&quot;                      &quot;duPont Manual High&quot;            
+##  [9] &quot;Eastern High&quot;                   &quot;Fairdale High School&quot;          
+## [11] &quot;Fern Creek High School&quot;         &quot;Iroquois High&quot;                 
+## [13] &quot;Jeffersontown High School&quot;      &quot;Louisville Male High School&quot;   
+## [15] &quot;Moore Traditional School&quot;       &quot;Pleasure Ridge Park High&quot;      
+## [17] &quot;Seneca High&quot;                    &quot;Southern High School&quot;          
+## [19] &quot;The Academy @ Shawnee&quot;          &quot;Valley High School&quot;            
+## [21] &quot;Waggener High School&quot;           &quot;Western High School&quot;</code></pre>
+<pre class="r"><code># Fix up some columns!
+
+library(stringr)
+ccr_data_t &lt;- ccr_data_s %&gt;% 
+  mutate(
+    SCH_NAME = str_replace_all(SCH_NAME, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% trimws(),
+    SCH_YEAR = 2016,
+    NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric(),
+    NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, &#39;[[:punct:]]&#39;,&#39;&#39;) %&gt;% as.numeric()
+  )
+
+glimpse(ccr_data_t)</code></pre>
+<pre><code>## Observations: 374
+## Variables: 6
+## $ SCH_YEAR                   &lt;dbl&gt; 2016, 2016, 2016, 2016, 2016, 2016,...
+## $ SCH_NAME                   &lt;chr&gt; &quot;Atherton High School&quot;, &quot;Atherton H...
+## $ DISAGG_LABEL               &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;...
+## $ NBR_GRADUATES_WITH_DIPLOMA &lt;dbl&gt; 264, 114, 150, 175, 59, 16, 9, 1, N...
+## $ NBR_CCR_REGULAR            &lt;dbl&gt; 209, 82, 127, 150, 32, 13, NA, NA, ...
+## $ PCT_CCR_NO_BONUS           &lt;dbl&gt; 79.2, 71.9, 84.7, 85.7, 54.2, 81.3,...</code></pre>
+</div>
+<div id="mutate-and-stringr" class="section level2">
+<h2>Mutate and <code>stringr</code></h2>
+<ul>
+<li>Of all the <code>dplyr</code> functions, <code>mutate</code> is my favorite</li>
+<li><code>mutate</code> takes a column, applies a transformation to it, and either saves it back into the old column or creates a new column.
+<ul>
+<li>Great for using iterators like the <code>apply</code> family or the <code>purrr::map</code> family.</li>
+</ul></li>
+<li><code>stringr</code> is another <code>tidyverse</code> package, but it needs to be loaded separately.
+<ul>
+<li>There are a lot of basic string functions built into base R, but they don’t have the data as the first argument, and can’t be used with the <code>%&gt;%</code>.</li>
+<li>It’s PROBABLY a good idea to learn about the base R functions, but IMO, learning <code>stringr</code> is better.</li>
+<li>There are other, more powerful string function in <code>stringr</code> not available in base R.</li>
+</ul></li>
+<li>We also used <code>as.numeric()</code> which is a casting function. BE CAREFUL with these.
+<ul>
+<li>If we hadn’t pulled out the extra punctuation first, it would have cast the non-numeric data to <code>NA</code>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="narrow-it-down" class="section level2">
+<h2>Narrow It Down</h2>
+<ul>
+<li>We’ve still got <em>Wide</em> data. Let’s narrow it up!</li>
+</ul>
+<pre class="r"><code>ccr_data_n &lt;- ccr_data_t %&gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_n)</code></pre>
+<pre><code>## Observations: 1,122
+## Variables: 5
+## $ SCH_YEAR     &lt;dbl&gt; 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2...
+## $ SCH_NAME     &lt;chr&gt; &quot;Atherton High School&quot;, &quot;Atherton High School&quot;, &quot;...
+## $ DISAGG_LABEL &lt;chr&gt; &quot;All Students&quot;, &quot;Male&quot;, &quot;Female&quot;, &quot;White (Non-His...
+## $ Level        &lt;chr&gt; &quot;NBR_GRADUATES_WITH_DIPLOMA&quot;, &quot;NBR_GRADUATES_WITH...
+## $ value        &lt;dbl&gt; 264, 114, 150, 175, 59, 16, 9, 1, NA, 4, NA, 5, 1...</code></pre>
+</div>
+<div id="gather-or-the-most-confusing-thing-in-the-world." class="section level2">
+<h2><code>Gather</code>, or, the most confusing thing in the world.</h2>
+<ul>
+<li>Back in the day, many people used a package named <code>reshape2</code>
+<ul>
+<li>Many people still use it. The best part was <code>reshape2::melt</code>, which made data narrow.</li>
+</ul></li>
+<li><code>tidyr::gather</code> is, in my mind, a better solution. It’s part of the <code>tidyverse</code> and make things more explicit.
+<ul>
+<li><code>gather</code> takes a <em>key</em> and a <em>value</em>, which are NEW columns that will be created.</li>
+<li>Then, you pass it the columns you want to <em>gather</em> and those get placed into the <em>key</em> column
+<ul>
+<li>I told you this was confusing.</li>
+</ul></li>
+<li>There is a partner to <code>gather</code>, <code>spread</code>, which takes narrow data and makes it wide.</li>
+</ul></li>
+</ul>
+</div>
+<div id="next-up-listen-for-tips" class="section level2">
+<h2>Next Up, Listen for Tips!</h2>
+<ul>
+<li>Kris Stevens gave me this data, and told me that many of the “District Total” figures weren’t correct.</li>
+<li>Let’s fix them up!</li>
+</ul>
+<pre class="r"><code>ccr_data_n %&gt;% 
+    filter(Level == &#39;NBR_GRADUATES_WITH_DIPLOMA&#39;) %&gt;% 
+    group_by(DISAGG_LABEL) %&gt;% 
+    summarize(&#39;NBR_GRADUATES_WITH_DIPLOMA&#39; = sum(value, na.rm = T)) %&gt;% 
+    left_join(
+      ccr_data_n %&gt;% 
+        filter(Level == &#39;NBR_CCR_REGULAR&#39;) %&gt;% 
+        group_by(DISAGG_LABEL) %&gt;% 
+        summarize(&#39;NBR_CCR_REGULAR&#39; = sum(value, na.rm = T))
+    ) %&gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&gt;% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = &#39;District Total&#39;) %&gt;% 
+    bind_rows(ccr_data_n) %&gt;% View()</code></pre>
+</div>
+<div id="woof-that-code-is-ugly.-is-there-a-better-way" class="section level2">
+<h2>Woof, that code is ugly. Is there a better way?</h2>
+<pre class="r"><code>aggregate_level &lt;- function(df, col_head){
+  df %&gt;% 
+    filter(Level == col_head) %&gt;% 
+    group_by(DISAGG_LABEL) %&gt;% 
+    summarize(new_col = sum(value, na.rm = T)) %&gt;% 
+    rename_(.dots = setNames(&#39;new_col&#39;, eval(col_head)))
+}
+
+ccr_tidy &lt;- aggregate_level(ccr_data_n, &#39;NBR_GRADUATES_WITH_DIPLOMA&#39;) %&gt;% 
+  left_join(aggregate_level(ccr_data_n, &#39;NBR_CCR_REGULAR&#39;)) %&gt;% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %&gt;% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %&gt;% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = &#39;District Total&#39;) %&gt;% 
+    bind_rows(ccr_data_n)</code></pre>
+</div>
+<div id="group_by-summarize-joins-binds-nse-and-functional-programming" class="section level2">
+<h2><code>group_by</code>, <code>summarize</code>, joins, binds, NSE, and functional programming</h2>
+<ul>
+<li>WHAT A LIST</li>
+<li>If you’ve used SQL, you probably understand <code>group_by</code>.
+<ul>
+<li>When you group a column and then run an aggregation function, it aggregates PER GROUP.</li>
+</ul></li>
+<li><code>summarize</code> is one of those aggregation functions.
+<ul>
+<li><code>summarize</code> is kind of like mutate, but instead of creating a new column of the same length as the df, it summarizes the data.</li>
+<li>There are places where <code>summarize</code> is useful without <code>group_by</code>, but not many.</li>
+<li>The way we used <code>summarize</code> above, we got a number representing the sum of <code>value</code> by each <code>DISAGG_LABEL</code> .
+<ul>
+<li>We could have switched the <code>group_by</code> to <code>SCH_NAME</code> and it would have given us the sum of <code>value</code> by each school.</li>
+</ul></li>
+<li>It’s technically <code>summarise</code>, but this is America, dammit.</li>
+</ul></li>
+<li>Joins are also something SQL users will be familiar with.
+<ul>
+<li>Types: <code>left_join</code>, <code>inner_join</code>, <code>right_join</code>, <code>full_join</code>, <code>semi_join</code>, and <code>anti_join</code>.</li>
+<li>All types take two data frames, and typically a <code>by</code> argument, and sometimes a <code>suffix</code> argument.
+<ul>
+<li><code>by</code> takes a <em>vector</em> that looks like <code>c('lhs' = 'rhs')</code></li>
+<li>If there are column names in common with LHS and RHS, the default suffix is ‘.x’ and ‘.y’, but you can override those.</li>
+</ul></li>
+<li>We are using <code>left_join</code>:
+<ul>
+<li>“return all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.”</li>
+</ul></li>
+<li>The R documentation for joins is good if you aren’t clear about which of these. <code>anti_join</code> and <code>semi_join</code> are rare but cool.</li>
+</ul></li>
+<li>Binds are way to bind together data frames. They stack on top of each other.
+<ul>
+<li><code>bind_rows</code> and <code>bind_cols</code> are the <code>dplyr</code> way to do things.</li>
+<li><code>rbind</code> and <code>cbind</code> are base R.</li>
+<li>As usualy, the tidyverse way is safer and more powerful.</li>
+</ul></li>
+<li>Non-standard evaluation
+<ul>
+<li>If you’ve got keen eyes, you’ve noticed that the arguments to the <code>dplyr</code> functions are never strings – they are bare and unquoted.</li>
+<li>This form of evaluation is called “standard evaluation”, and it’s not great for programming. (Fine for analysis though).</li>
+<li>“Non-Standard Evaluation” is also present in <code>dplyr</code>. It’s all the functions with an underscore after them. For example <code>rename_</code> (rename is another way to do <code>select</code>)
+<ul>
+<li>Probably don’t worry about knowing how to do this, but know it’s there.</li>
+</ul></li>
+</ul></li>
+<li>Functional Programming
+<ul>
+<li>This is the heart of R – building functions you can call later.</li>
+<li>Everything we’ve “called” so far is technically a function. You can build your own!</li>
+<li><code>function(x,y){}</code> would create a function that you could call with two inputs.</li>
+<li>Most of the functions I write are anonymous, but not always!</li>
+</ul></li>
+</ul>
+</div>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=%2f2017%2f07%2f28%2feda-and-basic-data-munging-with-public-data%2f" title="Share on Facebook"><span class="fa fa-facebook fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://plus.google.com/share?url=%2f2017%2f07%2f28%2feda-and-basic-data-munging-with-public-data%2f" title="Share on Google+"><span class="fa fa-google-plus fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2017%2f07%2f28%2feda-and-basic-data-munging-with-public-data%2f" title="Share on LinkedIn"><span class="fa fa-linkedin fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/home?status=%2f2017%2f07%2f28%2feda-and-basic-data-munging-with-public-data%2f" title="Tweet this"><span class="fa fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 offset-sm-1 blog-sidebar">
+  
+
+  
+
+  
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+  </body>
+
+</html>
