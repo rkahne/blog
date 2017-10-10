@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1501286698185.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1721193395",
+    "id" : "C0A39B8E",
+    "lastKnownWriteTime" : 1504156040,
+    "last_content_update" : 1504156040121,
+    "path" : "C:/Users/rkahn/Google Drive/R/blog/content/post/EDA_Munging.Rmd",
+    "project_path" : "content/post/EDA_Munging.Rmd",
+    "properties" : {
+        "cursorPosition" : "341,3",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

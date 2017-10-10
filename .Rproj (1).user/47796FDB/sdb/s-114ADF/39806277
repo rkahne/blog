@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1493317103353.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "39806277",
+    "lastKnownWriteTime" : 8030883985215747941,
+    "last_content_update" : 1493317103353,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7E3FAF4A",
+        "caption" : "consolidated_kyhouse_result",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=consolidated_kyhouse_result&cache_key=7E3FAF4A",
+        "displayedObservations" : 135,
+        "environment" : "",
+        "object" : "consolidated_kyhouse_result",
+        "preview" : 0,
+        "totalObservations" : 135,
+        "variables" : 6
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

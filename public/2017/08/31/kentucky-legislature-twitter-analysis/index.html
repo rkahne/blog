@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Kentucky Legislature Twitter Analysis" />
+<meta property="og:description" content="The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.
+Method!The Kentucky Legislative Research Commission director, David Byerman, manages a list of all the Kentucky legislators who use the twitter application." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2017/08/31/kentucky-legislature-twitter-analysis/" />
+
+
+
+<meta property="article:published_time" content="2017-08-31T13:14:46-04:00"/>
+<meta property="article:modified_time" content="2017-08-31T13:14:46-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Kentucky Legislature Twitter Analysis"/>
+<meta name="twitter:description" content="The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.
+Method!The Kentucky Legislative Research Commission director, David Byerman, manages a list of all the Kentucky legislators who use the twitter application."/>
+<meta name="generator" content="Hugo 0.29" />
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Kentucky Legislature Twitter Analysis",
+  "url": "/2017/08/31/kentucky-legislature-twitter-analysis/",
+  "wordCount": "1438",
+  "datePublished": "2017-08-31T13:14:46-04:00",
+  "dateModified": "2017-08-31T13:14:46-04:00",
+  "author": {
+    "@type": "Person",
+    "name": "Robert Kahne"
+  },
+  "keywords": "Kentucky,R,Government"
+}
+</script>
+
+
+
+    <link rel="canonical" href="../../../../2017/08/31/kentucky-legislature-twitter-analysis/">
+
+    <title>Kentucky Legislature Twitter Analysis | Blog - Robert Kahne</title>
+
+    <!-- combined, minified CSS -->
+    <link href="../../../../css/style.css" rel="stylesheet" integrity="sha384-j3n8sYdzztDYtVc80KiiuOXoCg5Bjz0zYyLGzDMW8RbfA0u5djbF0GO3bVOPoLyN" crossorigin="anonymous">
+
+    
+
+    
+
+    
+
+    
+
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="../../../../">Home</a>
+          
+          
+          <a class="nav-link" href="../../../../about/">About</a>
+          
+          
+        </nav>
+      </div>
+    </div>
+
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title"><a href="../../../../" rel="home">Blog - Robert Kahne</a></h1>
+        <p class="lead blog-description">A website built through Hugo and blogdown.</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title"><a href="../../../../2017/08/31/kentucky-legislature-twitter-analysis/">Kentucky Legislature Twitter Analysis</a></h2>
+    <p class="blog-post-meta"><time datetime="2017-08-31T13:14:46-04:00">Thu Aug 31, 2017</time> by Robert Kahne in 
+
+<i class="fa fa-tag" aria-hidden="true"></i>&nbsp;<a href="../../../../tags/kentucky" rel="tag">Kentucky</a>, <a href="../../../../tags/r" rel="tag">R</a>, <a href="../../../../tags/government" rel="tag">Government</a>
+
+</p>
+  </header>
+  <p>The women and men who make up the Kentucky legislature use Twitter often to communicate with themselves, their constituents, and Kentuckians as a whole. I analyzed the tweets of the 112 legislators who use the application for sentiment and usage patterns. It was fun project! I learned a lot and I hope you learn something from my work.</p>
+<div id="method" class="section level2">
+<h2>Method!</h2>
+<p>The Kentucky Legislative Research Commission director, <a href="https://twitter.com/DirectorLRC">David Byerman</a>, manages a list of all the Kentucky legislators who use the twitter application. When I was a student in the <a href="https://www.codelouisville.org/">Code Louisville</a> program, I registered a twitter application that I never used. I repurposed that application to pull data from the twitter API about legislators tweets.</p>
+<p>In order to grab the usernames of the legislators, I used the browser-based <a href="https://dev.twitter.com/rest/tools/console">Twitter API console</a>, and then used the R package <code>rtweet</code> to pull the timelines of the legislators. For this exercise, I grabbed only the tweets since January 1, 2017 (the 2017 legislative session started shortly after that). I pulled the public data about the legislators accounts on August 20, 2017, and last refreshed the timelines of the legislators around 10:00 PM on August 30, 2017.</p>
+<p>As always, I used the R language to analyze the data and produce the visualizations seen below. The graphics are mostly faceted by party, which is good for being able to read names, but does result in the loss of some interesting information. I’m happy to make you custom graphs if you ask nicely.</p>
+</div>
+<div id="twitter-a-popularity-contest" class="section level2">
+<h2>Twitter: A Popularity Contest</h2>
+<p>Politicians, by nature, care about being popular. It’s how they get elected! Personally, I think politicians use twitter at rate disproportionate to the population as a whole because the app puts metrics around how popular each person is. The most important metrics to most people are the number of people who follow your account. (I recently cracked <a href="https://twitter.com/rkahne">1,000</a> and I was embarrassed about how excited I was). Here are is how many people follow each member of the legislature:</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/followers-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Rep. Brandon Reed (R-Hodgenville) is the legislator with the most followers. Rep. Attica Scott (D-Louisville), is second. Both of them are Freshmen legislators. Using a mean, Republicans have a larger average following, 1,449 to 1,346. However, Democrats have the advantage when we use median to judge the average, 1120 to 985.</p>
+<p>Now, let’s take a look at who is on #TeamFollowBack:</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/following-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Rep. Reed is definitely <em>NOT</em> on #TeamFollowBack, as he only follows 253 accounts, 97% fewer than the number that follow him. However, it’s pretty clear that Democratic women are good listeners – out of the six Democrats who follow the most accounts, five are women. Also, Julia Raque Adams is the only Republican woman in the top ten of her caucus using that metric.</p>
+</div>
+<div id="heavy-users" class="section level2">
+<h2>Heavy Users</h2>
+<p>The twitter API gives us all the tweets from an account, including retweets. I thought it would be interesting to look at who used twitter the most – both by writing their own tweets, and by retweeting others.</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20and%20retweets-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Rep. Scott and Sen. Whitney Westerfield (R-Hopkinsville) (both former guests on <a href="http://myoldkentuckypodcast.podbean.com/">My Old Kentucky Podcast</a>!) are the heaviest users of twitter overall, with 2,584 and 2,265 tweets since the new year, respectively. However, when looking at original content only, Rep. Jason Nemes (R-Louisville) and Sen. Reggie Thomas (D-Lexington) are among the heavier users. These four legislators are the only members who have sent more than 750 original tweets since the beginning of 2017. The story of retweets is similar to the story about the number of accounts followed: three Democratic women lead their caucus.</p>
+<p>Let’s look at the average by party:</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20per%20legislator-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>While Democrats and Republicans have about the same amount of retweets per legislator (<code>total number of retweets</code> / <code>number of caucus members on twitter</code>), Democrats send significantly more original tweets.</p>
+</div>
+<div id="who-up" class="section level2">
+<h2>Who Up?</h2>
+<p>The twitter API gives us access to the exact moment each tweet was sent. That’s fun. Let’s take a look at the tweets over time using density plots, and then a density plot of the time of day when each tweet was sent (this one is fun):</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20over%20time-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The legislative session kicked off in January, and then, after organizing, took a break for about a month. Then, they were back in session until March. This is reflected clearly in this data. Tweets are on the rise again, though! It might be about national politics, or the calls for a special session about pensions and tax reform.</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/tweets%20by%20time%20of%20day-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Legislators stay up late! The MOST COMMON time at which tweets were sent was after midnight. Not until about about 2:30 AM does the tweeting stop! Y’all need to go to bed. Nothing good ever happened to an elected official after the bars close.</p>
+<p>This is begging to be analyzed by party. Let’s take a look:</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/time%20by%20party-1.png" width="672" style="display: block; margin: auto;" /><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/time%20by%20party-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>It looks like the peaks and valleys around the legislative session were more pronounced among Democrats. Democrats also seemed to have a significant bump in tweets during the early summer.</p>
+<p>Regarding time of day: it looks like Republicans are the culprits when it comes to who stays up late. Democrats definitely stay up late as well, but the most common time for Dems to tweet is around noon. The GOP peaks about 1:00 AM.</p>
+</div>
+<div id="sentiment-analysis-using-tidytext" class="section level2">
+<h2>Sentiment Analysis Using <code>tidytext</code>!</h2>
+<p>Sentiment analysis is a process by which individual words are associated with specific sentiments. To do this, data analysts utilize lexicons. Lexicons used in sentiment analysis identify words which are inherently positive and negative. These lexicons are the word of researchers (typically in linguistics) who have done the association. Sentiment analysis allows us to gauge the overall feelings in a piece of writing or group of statements. By performing this type of analysis, we gain insight into the mood of the writer/speaker/commenter. <strong>THIS WORK IS INHERENTLY PROBLEMATIC</strong>. Please know that while you read it, and don’t form your FULL opinion about these legislators using sentiment analysis. However, I think this kind of work is still really useful! Let’s first take a look at the sentiment by legislator using the <code>Bing</code> lexicon. The <a href="https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">Bing</a> lexicon was developed by Bing Liu (et al) and is a very straightforward positive-negative lexicon. It includes 6,788 words.</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/bing%20pops-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>I used the incredible <code>tidytext</code> package to do this analysis. I pulled each word out of all the tweets, and scaled them using the <code>Bing</code> lexicon. Then, I scaled by the number of tweets. We’ve already done enough analysis on who tweets the most: this shows us on average, which legislators use the most positive and negative words. The lollipops above 0 represent the usage rate of positive words, while the lollipops below 0 represent the usage rate of negative words. This graph is arranged by net sentiment: <code>positive</code> words minus <code>negative</code> words. You can see that Rep. Dennis Horlander and Rep. Mary Lou Marzian (both D-Louisville) have fairly high usage rate of positive words, but are among the most negative Democratic tweeters because of their high rates of negative words. Meanwhile, Rep. Reed, the legislator with the most followers, is the most positive Republican. This might help to explain how he has so many followers despite not that many actual tweets.</p>
+<p>Let’s take a look by party!</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/scaled%20sentiment%20by%20party-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Republicans are more emotive than Democrats, at least according to Bing, et al. The GOP has a higher usage rate of negative words AND positive words. While the GOP is only slightly less negative than the Democrats, their usage rate of positive words is double that of the Democrats.</p>
+<p>“Positive” and “Negative” are straightforward, but they aren’t very descriptive. The other lexicon I used is the <a href="http://saifmohammad.com/WebPages/lexicons.html">NRC Emotion Lexicon</a>. In addition to positive and negative sentiments, this lexicon also adds eight emotions, which adds a level of specificity into the analysis. The NRC lexicon includes 13,301 words, which is WAY more than Bing. The best way to view this is in a treemap:</p>
+<p><img src="../../../../post/2017-08-31-kentucky-legislature-twitter-analysis_files/figure-html/treeplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>It looks like the emotions most likely to be expressed by Kentucky legislators are “positive” and “anticipation”. I think it’s good to have forward looking legislators! It also appears that emotions that tile towards “positive” such as “trust” and “joy” outnumber those that tilt negative, like “fear” and “disgust”.</p>
+</div>
+<div id="in-conclusion" class="section level2">
+<h2>In Conclusion</h2>
+<p>I hope you found some of this a little informative! I enjoyed putting it together. If you’d like to dig deeper, check out this <a href="https://rkahne.shinyapps.io/kyleg_twitter/">shiny app</a> I built. You can drill down to view the twitter behavior of individual legislators! (I hope they don’t get TOO mad at me – I’ll take it down if they promise to raise taxes on cigarettes and expand the sales tax to luxury services). If you want to reach me, please do so at rkahne [at] gmail.com, or, of course, on Twitter <span class="citation">[@rkahne]</span>(<a href="https://twitter.com/rkahne" class="uri">https://twitter.com/rkahne</a>).</p>
+</div>
+
+
+  
+
+  
+  <hr>
+  <footer>
+
+  
+    <section>
+    <h4>Share</h4>
+    <nav class="nav sharing-icons">
+      <a class="nav-item" href="https://www.facebook.com/sharer/sharer.php?u=%2f2017%2f08%2f31%2fkentucky-legislature-twitter-analysis%2f" title="Share on Facebook"><span class="fa fa-facebook fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://plus.google.com/share?url=%2f2017%2f08%2f31%2fkentucky-legislature-twitter-analysis%2f" title="Share on Google+"><span class="fa fa-google-plus fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2017%2f08%2f31%2fkentucky-legislature-twitter-analysis%2f" title="Share on LinkedIn"><span class="fa fa-linkedin fa-2x" aria-hidden="true"></span></a>
+      <a class="nav-item" href="https://twitter.com/home?status=%2f2017%2f08%2f31%2fkentucky-legislature-twitter-analysis%2f" title="Tweet this"><span class="fa fa-twitter fa-2x"></span></a>
+    </nav>
+  </section>
+
+  
+
+  
+  </footer>
+  
+
+</article> 
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 offset-sm-1 blog-sidebar">
+  
+
+  
+
+  
+</aside>
+
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
+      </p>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+  </body>
+
+</html>

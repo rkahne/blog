@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1493348658501.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A88865F6",
+    "lastKnownWriteTime" : 13229757704831081,
+    "last_content_update" : 1493348658501,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "FB200DC4",
+        "caption" : "map_metadata",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=map_metadata&cache_key=FB200DC4",
+        "displayedObservations" : 100,
+        "environment" : "",
+        "object" : "map_metadata",
+        "preview" : 0,
+        "totalObservations" : 100,
+        "variables" : 23
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

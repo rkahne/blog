@@ -1,0 +1,344 @@
+---
+tags: ['Learning', 'R', 'Open Data']
+date: 2017-07-28T13:14:46-04:00
+title: 'EDA and Basic Data Munging with Public Data'
+draft: FALSE
+author: 'Robert Kahne'
+---
+
+## What are we about to do?
+
+* Learn the most important idioms for data munging in R
+* Apply them to an open data example
+* By the end, I hope you can use these skills to repeat this process with data you find
+
+## What Data Are We Using?
+
+* Kentucky Department of Education College and Career Readiness Data
+* Easily Found on their [website](http://applications.education.ky.gov/SRC/DataSets.aspx)
+
+## Step 1: Load Up Tidyverse and Read In Data
+```{r Loading..., message = F, warning = F, echo = T}
+library(tidyverse)
+
+ccr_data <- read_csv('./EDA_Munging_data/1516.csv')
+
+glimpse(ccr_data)
+
+```
+
+* What do we have here?
+    + Is this data *Wide* or *Narrow*? (or both?!?!?!)
+        - Wide data has columns for each variable
+        - Narrow data typically has a "variable" column and a "value" column and each variable is repeated multiple times.
+        - R very much prefers narrow data
+    + What columns seem important?
+        - Does this data have multiple columns that represent the same value?
+        - Are there columns that don't contain useful information?
+        - Consider your purpose for looking at the data, what story seems interesting and relevant?
+
+```{r Initial Munging, message = F, warning = F, echo = T}
+# Look at data
+glimpse(ccr_data)
+# Unique values in each column
+map(ccr_data %>% filter(DIST_NAME == 'Jefferson County'), function(i) length(unique(i)))
+# Don't forget the glossary!
+# http://applications.education.ky.gov/SRC/Glossary.aspx
+
+## Looking at the data by county, selecting just the columns we are interested in
+
+ccr_data_s <- ccr_data %>% 
+  filter(DIST_NAME == 'Jefferson County') %>% 
+  select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_s)
+
+```
+
+## WTF JUST HAPPENED
+
+* The first thing we did was to load the `tidyverse`.  This gives use access to many of the most powerful data analysis packages.
+    + `dplyr` is a "grammar of data manipulation" and was written by Hadley Wickham.
+        - Four idioms in `dplyr` are the most important: `select`, `filter`, `mutate`, and `summarize`
+    + We've technically already used both `readr` with `read_csv` and also `tibble`.
+* `filter` - a subsetting function.  Takes column names and equivilencies as arguments.
+* `select` - a function for picking columns.
+    + `select` has a lot of helper functions, and negative values can be used.
+* `%>%` - the pipe. Linux people can guess what this means.
+    + Originally from the `magrittr` package. I have no idea what `magrittr` was supposed to do, but it gave use the pipe.
+    + When you see this, the data on the LHS becomes the first argument to the function on the RHS
+    + Once you get the hang of `%>%`, your life will change for the better
+    + A massive amount of R base functions have been rewritten so the data is the first argument.
+* *BONUS* `map` is from `purrr`.  It is a unique way to do iteration in R.  If we have time, I'll talk about it at the end.
+
+## Okay, So What Now?
+
+* Are there any `type` issues?
+* Let's explore our *narrow* columns to see if there are any inconsistencies.
+
+```{r More Munging, echo = T, message = F, warning = F}
+ccr_data_s %>% glimpse()
+ccr_data_s$SCH_NAME %>% unique() %>% sort()
+
+# Fix up some columns!
+
+library(stringr)
+ccr_data_t <- ccr_data_s %>% 
+  mutate(
+    SCH_NAME = str_replace_all(SCH_NAME, '[[:punct:]]','') %>% trimws(),
+    SCH_YEAR = 2016,
+    NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, '[[:punct:]]','') %>% as.numeric(),
+    NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, '[[:punct:]]','') %>% as.numeric()
+  )
+
+glimpse(ccr_data_t)
+
+```
+
+## Mutate and `stringr`
+
+* Of all the `dplyr` functions, `mutate` is my favorite
+* `mutate` takes a column, applies a transformation to it, and either saves it back into the old column or creates a new column.
+    + Great for using iterators like the `apply` family or the `purrr::map` family.
+* `stringr` is another `tidyverse` package, but it needs to be loaded separately.
+    + There are a lot of basic string functions built into base R, but they don't have the data as the first argument, and can't be used with the `%>%`.
+    + It's PROBABLY a good idea to learn about the base R functions, but IMO, learning `stringr` is better.
+    + There are other, more powerful string function in `stringr` not available in base R.
+* We also used `as.numeric()` which is a casting function.  BE CAREFUL with these.
+    + If we hadn't pulled out the extra punctuation first, it would have cast the non-numeric data to `NA`.
+    
+## Narrow It Down
+
+* We've still got *Wide* data. Let's narrow it up!
+
+```{r Narrowing, echo = T, message = F, warning = F}
+ccr_data_n <- ccr_data_t %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+
+glimpse(ccr_data_n)
+
+```
+
+## `Gather`, or, the most confusing thing in the world.
+
+* Back in the day, many people used a package named `reshape2`
+    + Many people still use it.  The best part was `reshape2::melt`, which made data narrow.
+* `tidyr::gather` is, in my mind, a better solution.  It's part of the `tidyverse` and make things more explicit.
+    + `gather` takes a _key_ and a _value_, which are NEW columns that will be created.
+    + Then, you pass it the columns you want to *gather* and those get placed into the _key_ column
+        - I told you this was confusing.
+    + There is a partner to `gather`, `spread`, which takes narrow data and makes it wide.
+    
+## Next Up, Listen for Tips!
+
+* Kris Stevens gave me this data, and told me that many of the "District Total" figures weren't correct.
+* Let's fix them up!
+
+```{r Adjusting, echo = T, message = F, warning = F}
+ccr_data_n %>% 
+    filter(Level == 'NBR_GRADUATES_WITH_DIPLOMA') %>% 
+    group_by(DISAGG_LABEL) %>% 
+    summarize('NBR_GRADUATES_WITH_DIPLOMA' = sum(value, na.rm = T)) %>% 
+    left_join(
+      ccr_data_n %>% 
+        filter(Level == 'NBR_CCR_REGULAR') %>% 
+        group_by(DISAGG_LABEL) %>% 
+        summarize('NBR_CCR_REGULAR' = sum(value, na.rm = T))
+    ) %>% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %>% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = 'District Total') %>% 
+    bind_rows(ccr_data_n) %>% View()
+```
+
+## Woof, that code is ugly.  Is there a better way?
+
+```{r Tidy, echo = T, message = F, warning = F}
+aggregate_level <- function(df, col_head){
+  df %>% 
+    filter(Level == col_head) %>% 
+    group_by(DISAGG_LABEL) %>% 
+    summarize(new_col = sum(value, na.rm = T)) %>% 
+    rename_(.dots = setNames('new_col', eval(col_head)))
+}
+
+ccr_tidy <- aggregate_level(ccr_data_n, 'NBR_GRADUATES_WITH_DIPLOMA') %>% 
+  left_join(aggregate_level(ccr_data_n, 'NBR_CCR_REGULAR')) %>% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %>% 
+    mutate(SCH_YEAR = 2016,
+           SCH_NAME = 'District Total') %>% 
+    bind_rows(ccr_data_n)
+
+```
+
+## `group_by`, `summarize`, joins, binds, NSE, and functional programming
+
+* WHAT A LIST
+* If you've used SQL, you probably understand `group_by`.  
+    + When you group a column and then run an aggregation function, it aggregates PER GROUP.
+* `summarize` is one of those aggregation functions. 
+    + `summarize` is kind of like mutate, but instead of creating a new column of the same length as the df, it summarizes the data. 
+    + There are places where `summarize` is useful without `group_by`, but not many.
+    + The way we used `summarize` above, we got a number representing the sum of `value` by each `DISAGG_LABEL` .
+        - We could have switched the `group_by` to `SCH_NAME` and it would have given us the sum of `value` by each school.
+    + It's technically `summarise`, but this is America, dammit.
+* Joins are also something SQL users will be familiar with.
+    + Types: `left_join`, `inner_join`, `right_join`, `full_join`, `semi_join`, and `anti_join`.
+    + All types take two data frames, and typically a `by` argument, and sometimes a `suffix` argument.
+        - `by` takes a _vector_ that looks like ```c('lhs' = 'rhs')```
+        - If there are column names in common with LHS and RHS, the default suffix is '.x' and '.y', but you can override those.
+    + We are using `left_join`:
+        - "return all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned."
+    + The R documentation for joins is good if you aren't clear about which of these.  `anti_join` and `semi_join` are rare but cool.
+* Binds are way to bind together data frames.  They stack on top of each other.
+    + `bind_rows` and `bind_cols` are the `dplyr` way to do things.
+    + `rbind` and `cbind` are base R.
+    + As usualy, the tidyverse way is safer and more powerful.
+* Non-standard evaluation
+    + If you've got keen eyes, you've noticed that the arguments to the `dplyr` functions are never strings -- they are bare and unquoted.
+    + This form of evaluation is called "standard evaluation", and it's not great for programming. (Fine for analysis though).
+    + "Non-Standard Evaluation" is also present in `dplyr`.  It's all the functions with an underscore after them.  For example `rename_` (rename is another way to do `select`)
+        - Probably don't worry about knowing how to do this, but know it's there.
+* Functional Programming
+    + This is the heart of R -- building functions you can call later.
+    + Everything we've "called" so far is technically a function.  You can build your own!
+    + `function(x,y){}` would create a function that you could call with two inputs.
+    + Most of the functions I write are anonymous, but not always!
+    
+## OKAY SO WHAT NEXT
+
+* We've been working with one csv's worth of data so far, but the BoE makes several years available.  Let's combine them!
+* To do that, we will put all the code we've made so far into a function, and then bind all the data together using that function.
+
+```{r Combine, echo = T, message = F, warning = F}
+
+tidy_ccr <- function(df, county){
+  tidy_df <- df %>% 
+    filter(DIST_NAME == county) %>% 
+    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %>% 
+    mutate(
+      # First Change
+      SCH_YEAR = map_int(SCH_YEAR, function(i){
+        case_when(
+          i == 20152016 ~ 2016L,
+          i == 20142015 ~ 2015L,
+          i == 20132014 ~ 2014L,
+          i == 20122013 ~ 2013L,
+          i == 20112012 ~ 2012L
+        )
+      }) %>% ordered(),
+      SCH_NAME = str_replace_all(SCH_NAME, '[[:punct:]]','') %>% trimws(),
+      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, '[[:punct:]]','') %>% as.numeric(),
+      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, '[[:punct:]]','') %>% as.numeric()
+    ) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+  
+  aggregate_level(tidy_df, 'NBR_GRADUATES_WITH_DIPLOMA') %>% 
+    left_join(aggregate_level(tidy_df, 'NBR_CCR_REGULAR')) %>% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %>% 
+    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
+           SCH_NAME = 'District Total') %>% 
+    bind_rows(tidy_df)
+}
+
+bind_data <- function(county){
+  bind_rows(
+    read_csv('./EDA_Munging_data/1516.csv') %>% tidy_ccr(county),
+    read_csv('./EDA_Munging_data/1415.csv') %>% tidy_ccr(county),
+    read_csv('./EDA_Munging_data/1314.csv') %>% tidy_ccr(county),
+    read_csv('./EDA_Munging_data/1213.csv') %>% tidy_ccr(county),
+    read_csv('./EDA_Munging_data/1112.csv') %>% tidy_ccr(county)
+  )
+}
+
+jefferson_data <- bind_data('Jefferson County')
+
+```
+
+# Now You Get It!
+
+* You get it, right?
+    + What does the `bind_data` function do?  Can you explain it?
+* I also made a change to the `SCH_YEAR` column, so that it work correctly.
+    + `case_when` is a sexy way to do `ifelse`.
+    + I also used another `map` function.
+* Okay, so let's take a look to make sure things aren't too weird.
+
+```{r Full Tidy, echo = T, message = F, warning = F}
+glimpse(jefferson_data)
+jefferson_data$DISAGG_LABEL %>% unique()
+jefferson_data$SCH_NAME %>% unique()
+
+tidy_ccr <- function(df, county){
+  tidy_df <- df %>% 
+    filter(DIST_NAME == county) %>% 
+    select(SCH_YEAR, SCH_NAME, DISAGG_LABEL, NBR_GRADUATES_WITH_DIPLOMA, NBR_CCR_REGULAR, PCT_CCR_NO_BONUS) %>% 
+    mutate(
+      SCH_YEAR = map_int(SCH_YEAR, function(i){
+        case_when(
+          i == 20152016 ~ 2016L,
+          i == 20142015 ~ 2015L,
+          i == 20132014 ~ 2014L,
+          i == 20122013 ~ 2013L,
+          i == 20112012 ~ 2012L
+        )
+      }) %>% ordered(),
+      SCH_NAME = map_chr(SCH_NAME, function(i){
+        if(i == 'Dupont Manual High') 'duPont Manual High'
+        else if(i == 'Fern Creek Traditional High') 'Fern Creek High School'
+        else if(i == 'Fairdale High School MCA') 'Fairdale High School'
+        else str_replace_all(i, '[[:punct:]]','') %>% trimws()
+      }),
+      NBR_GRADUATES_WITH_DIPLOMA = str_replace_all(NBR_GRADUATES_WITH_DIPLOMA, '[[:punct:]]','') %>% as.numeric(),
+      NBR_CCR_REGULAR = str_replace_all(NBR_CCR_REGULAR, '[[:punct:]]','') %>% as.numeric()
+    ) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS)
+  
+  aggregate_level(tidy_df, 'NBR_GRADUATES_WITH_DIPLOMA') %>% 
+    left_join(aggregate_level(tidy_df, 'NBR_CCR_REGULAR')) %>% 
+    mutate(PCT_CCR_NO_BONUS = round(100 * (NBR_CCR_REGULAR / NBR_GRADUATES_WITH_DIPLOMA ))) %>% 
+    gather(key = Level, value = value, NBR_GRADUATES_WITH_DIPLOMA,NBR_CCR_REGULAR,PCT_CCR_NO_BONUS) %>% 
+    mutate(SCH_YEAR = tidy_df$SCH_YEAR[1],
+           SCH_NAME = 'District Total') %>% 
+    bind_rows(tidy_df)
+}
+
+jefferson_data <- bind_data('Jefferson County')
+```
+
+## Fixing the Weirdness
+
+* The `SCH_NAME` field was not consistent across the data, so we fixed it.
+    + We used an iterator, which is a little more advaced than we are going today (probably)
+
+## NOW WE'VE GOT TIDY DATA!!!!
+
+* Let's do some basic visualizations!
+
+```{r Viz, echo = T, warning = F, message = F}
+facet_ccr <- function(df, lev){
+  ggplot(df %>% 
+         filter(SCH_NAME != 'District Total',
+                Level == 'PCT_CCR_NO_BONUS', 
+                DISAGG_LABEL == lev), 
+       aes(x = SCH_YEAR, y = value, group = 1)) + 
+  geom_smooth() +
+  geom_point() +
+  ggtitle('Percent College Career Ready by School, 2012 - 2016',
+          subtitle = lev) +
+  facet_wrap(~SCH_NAME) +
+  theme_minimal()
+}
+
+j<- bind_data('Jefferson County')
+f <- bind_data('Fayette County')
+
+facet_ccr(j, 'All Students')
+facet_ccr(f, 'All Students')
+
+```
+
+    

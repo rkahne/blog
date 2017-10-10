@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Blog - Robert Kahne</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Apr 2017 13:14:46 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 10 Oct 2017 13:12:32 -0400</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Government</title>
       <link>/tags/government/</link>
-      <pubDate>Wed, 19 Apr 2017 13:14:46 -0400</pubDate>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
       
       <guid>/tags/government/</guid>
       <description></description>
@@ -23,9 +23,27 @@
     <item>
       <title>Kentucky</title>
       <link>/tags/kentucky/</link>
-      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
       
       <guid>/tags/kentucky/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning</title>
+      <link>/tags/learning/</link>
+      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
+      
+      <guid>/tags/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open Data</title>
+      <link>/tags/open-data/</link>
+      <pubDate>Fri, 28 Jul 2017 13:14:46 -0400</pubDate>
+      
+      <guid>/tags/open-data/</guid>
       <description></description>
     </item>
     
@@ -41,7 +59,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 10 Oct 2017 13:12:32 -0400</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
